@@ -34,7 +34,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final Widget body;
     if (_tasks != null) {
-      body = TaskListView(tasks: _tasks!);
+      body = TaskListView(
+        tasks: _tasks!,
+        notifyParent: _updateTasks,
+      );
     } else {
       body = const CustomProgressIndicator();
     }
