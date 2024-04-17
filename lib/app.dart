@@ -8,20 +8,22 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Estudando',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      darkTheme: AppTheme.getTheme(
-        SystemTheme.accentColor.accent,
-        Brightness.dark,
+    return SystemThemeBuilder(
+      builder: (context, accent) => MaterialApp(
+        title: 'Estudando',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        darkTheme: AppTheme.getTheme(
+          accent.accent,
+          Brightness.dark,
+        ),
+        theme: AppTheme.getTheme(
+          accent.accent,
+          Brightness.light,
+        ),
+        routes: AppRoutes.define(),
+        initialRoute: AppRoutes.signInPage,
       ),
-      theme: AppTheme.getTheme(
-        SystemTheme.accentColor.accent,
-        Brightness.light,
-      ),
-      routes: AppRoutes.define(),
-      initialRoute: AppRoutes.signInPage,
     );
   }
 }
