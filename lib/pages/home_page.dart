@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       body = const CustomProgressIndicator();
     }
     return BasePage(
-      title: 'title',
+      title: 'Suas Tarefas',
       leading: IconButton(
         onPressed: () {
           final db = DBOperations();
@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () async {
                         final db = DBOperations();
                         await db.createTask(titleController.text);
+                        await _updateTasks();
                         if (!context.mounted) return;
                         Navigator.pop(context);
                       },

@@ -9,6 +9,15 @@ final class AppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
+      listTileTheme: ListTileThemeData(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+        ),
+        tileColor: scheme.primaryContainer,
+        textColor: scheme.onPrimaryContainer,
+      ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle(
