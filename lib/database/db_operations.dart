@@ -33,7 +33,10 @@ final class DBOperations {
   Future<void> deleteTask() async {}
 
   Future<List<TaskModel>> getTasks() async {
-    final json = await db.from('tasks').select();
+    final json = await db
+        .from('tasks')
+        .select()
+        .eq('user', db.auth.currentUser?.id as Object);
     final tasks = <TaskModel>[];
     for (final task in json) {
       tasks.add(TaskModel.fromJson(task));

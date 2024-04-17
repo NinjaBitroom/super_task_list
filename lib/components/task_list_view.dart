@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 
 class TaskListView extends StatefulWidget {
@@ -12,30 +11,20 @@ class TaskListView extends StatefulWidget {
 }
 
 class _TaskListViewState extends State<TaskListView> {
-  late List<TaskModel> _tasks;
-
-  Future<void> _updateTasks() async {
-    final db = DBOperations();
-    final taskList = await db.getTasks();
-    setState(() {
-      _tasks = taskList;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _tasks = widget.tasks;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    if (widget.tasks.isEmpty) {
+      return const Center(
+        child: Text('Você não possui nenhuma tarefa'),
+      );
+    }
     return ListView.builder(
-      itemCount: _tasks.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(_tasks[index].title),
+      itemCount: widget.tasks.length,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListTile(
+          title: Text(widget.tasks[index].title),
+        ),
       ),
     );
   }
