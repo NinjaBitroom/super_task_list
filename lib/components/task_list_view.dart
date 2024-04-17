@@ -26,54 +26,89 @@ class _TaskListViewState extends State<TaskListView> {
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: IconButton(
-            onPressed: () async {
-              final titleController = TextEditingController(
-                text: widget.tasks[index].title,
-              );
-              showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  child: Container(
-                    height: 200,
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextField(
-                          controller: titleController,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Editar Tarefa',
+            leading: IconButton(
+              onPressed: () async {
+                final titleController = TextEditingController(
+                  text: widget.tasks[index].title,
+                );
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: Container(
+                      height: 200,
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextField(
+                            controller: titleController,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Editar Tarefa',
+                            ),
                           ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            final db = DBOperations();
-                            await db.updateTask(
-                              widget.tasks[index].id,
-                              titleController.text,
-                            );
-                            widget.notifyParent();
-                            if (!context.mounted) return;
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Salvar'),
-                        )
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.primary,
+                                  ),
+                                  foregroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  final db = DBOperations();
+                                  await db.updateTask(
+                                    widget.tasks[index].id,
+                                    newTitle: titleController.text,
+                                  );
+                                  widget.notifyParent();
+                                  if (!context.mounted) return;
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Salvar'),
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.error,
+                                  ),
+                                  foregroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.onError,
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  final db = DBOperations();
+                                  await db.deleteTask(widget.tasks[index].id);
+                                  widget.notifyParent();
+                                  if (!context.mounted) return;
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Deletar'),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-            icon: const Icon(Icons.edit),
-          ),
-          title: Text(widget.tasks[index].title),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.delete),
-          ),
-        ),
+                );
+              },
+              icon: const Icon(Icons.edit),
+            ),
+            title: Text(widget.tasks[index].title),
+            trailing: Checkbox(
+              value: widget.tasks[index].done,
+              onChanged: (value) async {
+                final db = DBOperations();
+                await db.updateTask(widget.tasks[index].id, newDone: value);
+                widget.notifyParent();
+                if (!context.mounted) return;
+              },
+            )),
       ),
     );
   }
