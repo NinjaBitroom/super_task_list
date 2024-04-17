@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/app_routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_task_list/components/custom_progress_indicator.dart';
 import 'package:super_task_list/components/task_list_view.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 import 'package:super_task_list/pages/base_page.dart';
+import 'package:super_task_list/utils/app_routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           final db = DBOperations();
           db.signOut();
-          Navigator.pushReplacementNamed(context, AppRoutes.signInPage);
+          context.go(AppRoutes.signInPage);
         },
         icon: const Icon(Icons.logout),
       ),

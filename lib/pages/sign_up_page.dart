@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/app_routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
+import 'package:super_task_list/utils/app_routes.dart';
 
 final class SignUpPage extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -47,11 +48,7 @@ final class SignUpPage extends StatelessWidget {
                   if ((value.session == null) && (value.user == null)) {
                     throw Exception('Erro ao criar conta!');
                   }
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AppRoutes.homePage,
-                    (_) => false,
-                  );
+                  context.go(AppRoutes.homePage);
                 }).onError((error, stackTrace) {
                   debugPrint('$stackTrace');
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

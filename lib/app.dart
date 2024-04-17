@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/app_routes.dart';
+import 'package:super_task_list/utils/app_router.dart';
 import 'package:super_task_list/utils/app_theme.dart';
 import 'package:system_theme/system_theme.dart';
 
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SystemThemeBuilder(
-      builder: (context, accent) => MaterialApp(
+      builder: (context, accent) => MaterialApp.router(
         title: 'Estudando',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
@@ -21,8 +21,7 @@ class App extends StatelessWidget {
           accent.accent,
           Brightness.light,
         ),
-        routes: AppRoutes.define(),
-        initialRoute: AppRoutes.signInPage,
+        routerConfig: router,
       ),
     );
   }

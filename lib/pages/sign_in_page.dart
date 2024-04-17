@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/app_routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
+import 'package:super_task_list/utils/app_routes.dart';
 
 final class SignInPage extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -48,7 +49,7 @@ final class SignInPage extends StatelessWidget {
                   if ((value.session == null) && (value.user == null)) {
                     throw Exception('Erro ao fazer login!');
                   }
-                  Navigator.pushReplacementNamed(context, AppRoutes.homePage);
+                  context.go(AppRoutes.homePage);
                 }).onError((error, stackTrace) {
                   debugPrint('$stackTrace');
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -60,13 +61,13 @@ final class SignInPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.signUpPage);
+                context.go(AppRoutes.signUpPage);
               },
               child: const Text('Criar uma nova conta'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.forgotPasswordPage);
+                context.go(AppRoutes.forgotPasswordPage);
               },
               child: const Text('Esqueci minha senha'),
             ),
