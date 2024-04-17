@@ -29,7 +29,10 @@ final class DBOperations {
     });
   }
 
-  Future<void> updateTask() async {}
+  Future<void> updateTask(int id, String newTitle) async {
+    await db.from('tasks').update({'title': newTitle}).match({'id': id});
+  }
+
   Future<void> deleteTask() async {}
 
   Future<List<TaskModel>> getTasks() async {
