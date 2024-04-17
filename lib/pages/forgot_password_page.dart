@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/app_routes.dart';
 import 'package:super_task_list/pages/base_page.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -26,9 +25,7 @@ class ForgotPasswordPage extends StatelessWidget {
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.homePage);
-              },
+              onPressed: () {},
               child: const Text('Recuperar'),
             ),
           ],
