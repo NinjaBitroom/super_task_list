@@ -44,4 +44,3 @@ app.*.map.json
 
 # Custom
 key_supabase.dart
-/lib/key_supabase.dart
