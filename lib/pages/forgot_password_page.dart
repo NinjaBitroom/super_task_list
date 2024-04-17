@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
 
-class ForgotPasswordPage extends StatelessWidget {
-  const ForgotPasswordPage({super.key});
+final class ForgotPasswordPage extends StatelessWidget {
+  final _emailController = TextEditingController();
+
+  ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +22,17 @@ class ForgotPasswordPage extends StatelessWidget {
               height: 12,
             ),
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
             ),
             const SizedBox(
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final db = DBOperations();
+                db.recoverPassword(_emailController.text);
+              },
               child: const Text('Recuperar'),
             ),
           ],

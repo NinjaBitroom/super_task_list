@@ -22,6 +22,13 @@ final class DBOperations {
     await db.auth.signOut();
   }
 
+  Future<void> recoverPassword(String email) async {
+    await db.auth.resetPasswordForEmail(
+      email,
+      redirectTo: 'io.supabase.supertasklist://login-callback',
+    );
+  }
+
   Future<void> createTask(String title) async {
     await db.from('tasks').insert({
       'title': title,
