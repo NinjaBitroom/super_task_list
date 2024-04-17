@@ -25,7 +25,7 @@ final class DBOperations {
   Future<void> recoverPassword(String email) async {
     await db.auth.resetPasswordForEmail(
       email,
-      redirectTo: 'io.supabase.supertasklist://login-callback',
+      redirectTo: 'io.github.ninjabitroom://super_task_list/login-callback',
     );
   }
 
