@@ -29,17 +29,27 @@ final class DBOperations {
     });
   }
 
-  Future<void> updateTask(int id, String newTitle) async {
-    await db.from('tasks').update({'title': newTitle}).match({'id': id});
+  Future<void> updateTask(int id, {String? newTitle, bool? newDone}) async {
+    final dict = {};
+    if (newTitle != null) {
+      dict['title'] = newTitle;
+    }
+    if (newDone != null) {
+      dict['done'] = newDone;
+    }
+    await db.from('tasks').update(dict).match({'id': id});
   }
 
-  Future<void> deleteTask() async {}
+  Future<void> deleteTask(int id) async {
+    await db.from('tasks').delete().match({'id': id});
+  }
 
   Future<List<TaskModel>> getTasks() async {
     final json = await db
         .from('tasks')
         .select()
-        .eq('user', db.auth.currentUser?.id as Object);
+        .eq('user', db.auth.currentUser?.id as Object)
+        .order('id', ascending: true);
     final tasks = <TaskModel>[];
     for (final task in json) {
       tasks.add(TaskModel.fromJson(task));
