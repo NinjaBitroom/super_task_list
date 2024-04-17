@@ -49,6 +49,7 @@ final class DBOperations {
         .from('tasks')
         .select()
         .eq('user', db.auth.currentUser?.id as Object)
+        .order('done', ascending: true)
         .order('id', ascending: true);
     final tasks = <TaskModel>[];
     for (final task in json) {
