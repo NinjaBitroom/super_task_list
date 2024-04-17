@@ -9,14 +9,20 @@ final class AppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(scheme.primary),
+          foregroundColor: MaterialStatePropertyAll(scheme.onPrimary),
+        ),
+      ),
       listTileTheme: ListTileThemeData(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(12),
           ),
         ),
-        tileColor: scheme.primaryContainer,
-        textColor: scheme.onPrimaryContainer,
+        tileColor: scheme.surfaceVariant,
+        textColor: scheme.onSurfaceVariant,
       ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
