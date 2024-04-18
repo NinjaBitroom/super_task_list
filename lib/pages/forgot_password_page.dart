@@ -7,6 +7,11 @@ final class ForgotPasswordPage extends StatelessWidget {
 
   ForgotPasswordPage({super.key});
 
+  Future<void> _tryRecoverPassword() async {
+    final db = DBOperations();
+    await db.recoverPassword(_emailController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -25,14 +30,16 @@ final class ForgotPasswordPage extends StatelessWidget {
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
               autofocus: true,
+              onFieldSubmitted: (value) async {
+                await _tryRecoverPassword();
+              },
             ),
             const SizedBox(
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {
-                final db = DBOperations();
-                db.recoverPassword(_emailController.text);
+              onPressed: () async {
+                await _tryRecoverPassword();
               },
               child: const Text('Recuperar'),
             ),
