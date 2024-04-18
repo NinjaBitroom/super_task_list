@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return SystemThemeBuilder(
       builder: (context, accent) => MaterialApp.router(
-        title: 'Estudando',
+        title: 'Super Lista de Tarefas',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         darkTheme: AppTheme.getTheme(
