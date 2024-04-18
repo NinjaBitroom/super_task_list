@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_task_list/components/email_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
 
@@ -7,14 +8,15 @@ final class ForgotPasswordPage extends StatelessWidget {
 
   ForgotPasswordPage({super.key});
 
-  Future<void> _tryRecoverPassword(context) async {
+  Future<void> _tryRecoverPassword(BuildContext context) async {
     String message = 'Um e-mail foi enviado para a recuperação da senha';
     final db = DBOperations();
     try {
-      await db.recoverPassword(_emailController.text);
+      await db.sendPasswordResetEmail(_emailController.text);
     } catch (error) {
       message = '$error';
     }
+    if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
@@ -34,11 +36,8 @@ final class ForgotPasswordPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            TextFormField(
+            EmailFormField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'E-mail'),
-              autofocus: true,
-              autofillHints: const [AutofillHints.email],
               onFieldSubmitted: (value) async {
                 await _tryRecoverPassword(context);
               },

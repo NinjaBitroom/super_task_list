@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:super_task_list/models/task_model.dart';
+import 'package:super_task_list/utils/app_routes.dart';
 
 final class DBOperations {
   final db = Supabase.instance.client;
@@ -22,11 +23,16 @@ final class DBOperations {
     await db.auth.signOut();
   }
 
-  Future<void> recoverPassword(String email) async {
+  Future<void> sendPasswordResetEmail(String email) async {
+    const baseURL = 'io.github.ninjabitroom://super_task_list';
     await db.auth.resetPasswordForEmail(
       email,
-      redirectTo: 'io.github.ninjabitroom://super_task_list/login-callback',
+      redirectTo: baseURL + AppRoutes.resetPasswordPage,
     );
+  }
+
+  Future<void> resetPassword(String newPassword) async {
+    await db.auth.updateUser(UserAttributes(password: newPassword));
   }
 
   Future<void> createTask(String title) async {

@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/forgot_password_page.dart';
 import 'package:super_task_list/pages/home_page.dart';
-import 'package:super_task_list/pages/login_callback_page.dart';
+import 'package:super_task_list/pages/reset_password_page.dart';
 import 'package:super_task_list/pages/sign_in_page.dart';
 import 'package:super_task_list/pages/sign_up_page.dart';
 
@@ -11,7 +11,7 @@ final class AppRoutes {
   static const signInPage = '/signInPage';
   static const signUpPage = '/signUpPage';
   static const forgotPasswordPage = '/forgotPasswordPage';
-  static const loginCallBackPage = '/login-callback';
+  static const resetPasswordPage = '/resetPasswordPage';
   static final router = _getRouter();
 
   static GoRouter _getRouter() {
@@ -42,8 +42,8 @@ final class AppRoutes {
           builder: (context, state) => ForgotPasswordPage(),
         ),
         GoRoute(
-          path: loginCallBackPage,
-          builder: (context, state) => const LoginCallbackPage(),
+          path: resetPasswordPage,
+          builder: (context, state) => ResetPasswordPage(),
         ),
       ],
     );

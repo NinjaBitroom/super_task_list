@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:super_task_list/components/email_form_field.dart';
+import 'package:super_task_list/components/password_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
 import 'package:super_task_list/utils/app_routes.dart';
@@ -40,12 +42,8 @@ final class SignUpPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              autofillHints: const [AutofillHints.email],
+            EmailFormField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'E-mail'),
-              autofocus: true,
               onFieldSubmitted: (value) {
                 _passwordFocusNode.requestFocus();
               },
@@ -53,13 +51,10 @@ final class SignUpPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            TextFormField(
-              keyboardType: TextInputType.visiblePassword,
-              autofillHints: const [AutofillHints.newPassword],
-              obscureText: true,
+            PasswordFormField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Senha'),
               focusNode: _passwordFocusNode,
+              autofillHints: const [AutofillHints.newPassword],
               onFieldSubmitted: (value) {
                 _trySignUp(context);
               },
