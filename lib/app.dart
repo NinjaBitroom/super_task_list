@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/utils/app_router.dart';
+import 'package:super_task_list/utils/app_routes.dart';
 import 'package:super_task_list/utils/app_theme.dart';
 import 'package:system_theme/system_theme.dart';
 
@@ -21,7 +21,7 @@ class App extends StatelessWidget {
           accent.accent,
           Brightness.light,
         ),
-        routerConfig: router,
+        routerConfig: AppRoutes.router,
       ),
     );
   }
