@@ -24,6 +24,7 @@ final class ForgotPasswordPage extends StatelessWidget {
             TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
+              autofocus: true,
             ),
             const SizedBox(
               height: 12,

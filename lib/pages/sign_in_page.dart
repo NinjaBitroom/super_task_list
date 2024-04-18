@@ -7,8 +7,28 @@ import 'package:super_task_list/utils/app_routes.dart';
 final class SignInPage extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
 
   SignInPage({super.key});
+
+  void _trySignIn(BuildContext context) {
+    final db = DBOperations();
+    final signIn = db.signIn(
+      _emailController.text,
+      _passwordController.text,
+    );
+    signIn.then((value) {
+      if ((value.session == null) && (value.user == null)) {
+        throw Exception('Erro ao fazer login!');
+      }
+      context.go(AppRoutes.homePage);
+    }).onError((error, stackTrace) {
+      debugPrint('$stackTrace');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('$error'),
+      ));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +45,10 @@ final class SignInPage extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
+              autofocus: true,
+              onFieldSubmitted: (value) {
+                _passwordFocusNode.requestFocus();
+              },
             ),
             const SizedBox(
               height: 12,
@@ -34,28 +58,17 @@ final class SignInPage extends StatelessWidget {
               obscureText: true,
               controller: _passwordController,
               decoration: const InputDecoration(labelText: 'Senha'),
+              focusNode: _passwordFocusNode,
+              onFieldSubmitted: (value) {
+                _trySignIn(context);
+              },
             ),
             const SizedBox(
               height: 12,
             ),
             ElevatedButton(
               onPressed: () {
-                final db = DBOperations();
-                final signIn = db.signIn(
-                  _emailController.text,
-                  _passwordController.text,
-                );
-                signIn.then((value) {
-                  if ((value.session == null) && (value.user == null)) {
-                    throw Exception('Erro ao fazer login!');
-                  }
-                  context.go(AppRoutes.homePage);
-                }).onError((error, stackTrace) {
-                  debugPrint('$stackTrace');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('$error'),
-                  ));
-                });
+                _trySignIn(context);
               },
               child: const Text('Entrar'),
             ),

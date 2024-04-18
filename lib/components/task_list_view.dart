@@ -43,6 +43,7 @@ class _TaskListViewState extends State<TaskListView> {
                       children: [
                         TextField(
                           controller: titleController,
+                          autofocus: true,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Editar Tarefa',
@@ -101,7 +102,6 @@ class _TaskListViewState extends State<TaskListView> {
               final db = DBOperations();
               await db.updateTask(widget.tasks[index].id, newDone: value);
               widget.notifyParent();
-              if (!context.mounted) return;
             },
           ),
         ),

@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                         border: UnderlineInputBorder(),
                         labelText: 'Nome da tarefa',
                       ),
+                      autofocus: true,
                     ),
                     ElevatedButton(
                       onPressed: () async {
