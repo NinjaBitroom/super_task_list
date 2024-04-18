@@ -7,9 +7,17 @@ final class ForgotPasswordPage extends StatelessWidget {
 
   ForgotPasswordPage({super.key});
 
-  Future<void> _tryRecoverPassword() async {
+  Future<void> _tryRecoverPassword(context) async {
+    String message = 'Um e-mail foi enviado para a recuperação da senha';
     final db = DBOperations();
-    await db.recoverPassword(_emailController.text);
+    try {
+      await db.recoverPassword(_emailController.text);
+    } catch (error) {
+      message = '$error';
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -30,8 +38,9 @@ final class ForgotPasswordPage extends StatelessWidget {
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
               autofocus: true,
+              autofillHints: const [AutofillHints.email],
               onFieldSubmitted: (value) async {
-                await _tryRecoverPassword();
+                await _tryRecoverPassword(context);
               },
             ),
             const SizedBox(
@@ -39,7 +48,7 @@ final class ForgotPasswordPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                await _tryRecoverPassword();
+                await _tryRecoverPassword(context);
               },
               child: const Text('Recuperar'),
             ),

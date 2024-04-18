@@ -42,6 +42,7 @@ final class SignUpPage extends StatelessWidget {
           children: [
             TextFormField(
               keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail'),
               autofocus: true,
@@ -54,6 +55,7 @@ final class SignUpPage extends StatelessWidget {
             ),
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
+              autofillHints: const [AutofillHints.newPassword],
               obscureText: true,
               controller: _passwordController,
               decoration: const InputDecoration(labelText: 'Senha'),
