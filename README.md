@@ -26,3 +26,10 @@ No Supabase crie uma tabela `tasks` com as seguintes colunas:
 - title: text
 - done: bool `default: false`
 - user: uuid `vinculado com: auth.users.id`
+
+Em `Authentication > URL Configuration` do projeto, adicione as seguintes configuraçõs:
+- Site URL: io.github.ninjabitroom://super_task_list/login-callback
+- Redirect URLs: io.github.ninjabitroom://super_task_list/*
+
+Verifique se `{{ .ConfirmationURL }}` está sendo passado para o template do email de 
+`Reset Password`
