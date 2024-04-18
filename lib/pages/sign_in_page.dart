@@ -59,15 +59,21 @@ final class SignInPage extends StatelessWidget {
               },
               child: const Text('Entrar'),
             ),
-            TextButton(
-              onPressed: () {
-                context.go(AppRoutes.signUpPage);
-              },
-              child: const Text('Criar uma nova conta'),
+            const SizedBox(
+              height: 8,
             ),
             TextButton(
               onPressed: () {
-                context.go(AppRoutes.forgotPasswordPage);
+                context.push(AppRoutes.signUpPage);
+              },
+              child: const Text('Criar uma nova conta'),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            TextButton(
+              onPressed: () {
+                context.push(AppRoutes.forgotPasswordPage);
               },
               child: const Text('Esqueci minha senha'),
             ),
