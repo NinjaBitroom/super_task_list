@@ -25,6 +25,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> _addTask(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
+    final db = DBOperations();
+    await db.createTask(controller.text);
+    await _updateTasks();
+    if (!context.mounted) return;
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -66,6 +77,9 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     TextField(
                       controller: titleController,
+                      onSubmitted: (value) async {
+                        await _addTask(context, titleController);
+                      },
                       decoration: const InputDecoration(
                         border: UnderlineInputBorder(),
                         labelText: 'Nome da tarefa',
@@ -74,11 +88,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final db = DBOperations();
-                        await db.createTask(titleController.text);
-                        await _updateTasks();
-                        if (!context.mounted) return;
-                        Navigator.pop(context);
+                        await _addTask(context, titleController);
                       },
                       child: const Text('Salvar'),
                     )

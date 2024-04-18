@@ -14,6 +14,21 @@ class TaskListView extends StatefulWidget {
 }
 
 class _TaskListViewState extends State<TaskListView> {
+  Future<void> _updateTask(
+    BuildContext context,
+    TextEditingController controller,
+    int index,
+  ) async {
+    final db = DBOperations();
+    await db.updateTask(
+      widget.tasks[index].id,
+      newTitle: controller.text,
+    );
+    widget.notifyParent();
+    if (!context.mounted) return;
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.tasks.isEmpty) {
@@ -44,6 +59,9 @@ class _TaskListViewState extends State<TaskListView> {
                         TextField(
                           controller: titleController,
                           autofocus: true,
+                          onSubmitted: (value) async {
+                            await _updateTask(context, titleController, index);
+                          },
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Editar Tarefa',
@@ -54,14 +72,11 @@ class _TaskListViewState extends State<TaskListView> {
                           children: [
                             ElevatedButton(
                               onPressed: () async {
-                                final db = DBOperations();
-                                await db.updateTask(
-                                  widget.tasks[index].id,
-                                  newTitle: titleController.text,
+                                await _updateTask(
+                                  context,
+                                  titleController,
+                                  index,
                                 );
-                                widget.notifyParent();
-                                if (!context.mounted) return;
-                                Navigator.pop(context);
                               },
                               child: const Text('Salvar'),
                             ),
