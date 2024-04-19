@@ -15,28 +15,22 @@ final class ResetPasswordPage extends StatelessWidget {
     final db = DBOperations();
     try {
       await db.resetPassword(_newPasswordController.text);
-    } catch (error) {
-      message = '$error';
+      if (!context.mounted) return;
+      context.go(AppRoutes.signInPage);
+    } catch (e, t) {
+      debugPrint(t.toString());
+      message = '$e';
+    } finally {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
     }
-    if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-    context.go(AppRoutes.homePage);
   }
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
       title: 'Recuperar Senha',
-      leading: BackButton(
-        onPressed: () async {
-          final db = DBOperations();
-          await db.signOut();
-          if (!context.mounted) return;
-          context.go(AppRoutes.signInPage);
-        },
-      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
