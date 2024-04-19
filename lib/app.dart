@@ -13,11 +13,11 @@ class App extends StatelessWidget {
         title: 'Super Lista de Tarefas',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
-        darkTheme: AppTheme.getTheme(
+        darkTheme: AppTheme.createTheme(
           accent.accent,
           Brightness.dark,
         ),
-        theme: AppTheme.getTheme(
+        theme: AppTheme.createTheme(
           accent.accent,
           Brightness.light,
         ),

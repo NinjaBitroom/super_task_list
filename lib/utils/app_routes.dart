@@ -7,12 +7,12 @@ import 'package:super_task_list/pages/sign_in_page.dart';
 import 'package:super_task_list/pages/sign_up_page.dart';
 
 final class AppRoutes {
+  static final router = _getRouter();
   static const homePage = '/';
   static const signInPage = '/signInPage';
   static const signUpPage = '/signUpPage';
   static const forgotPasswordPage = '/forgotPasswordPage';
   static const resetPasswordPage = '/resetPasswordPage';
-  static final router = _getRouter();
 
   static GoRouter _getRouter() {
     return GoRouter(
