@@ -56,10 +56,10 @@ class EditTaskDialog extends StatelessWidget {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.errorContainer,
+                      Theme.of(context).colorScheme.secondaryContainer,
                     ),
                     foregroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.onErrorContainer,
+                      Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                   ),
                   onPressed: () async {

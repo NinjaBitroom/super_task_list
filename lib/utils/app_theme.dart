@@ -3,18 +3,18 @@ import 'package:flutter/services.dart';
 
 abstract final class AppTheme {
   static ThemeData createTheme(Color seedColor, Brightness brightness) {
-    final ColorScheme scheme = _createScheme(seedColor, brightness);
-    return _createThemeData(scheme);
+    final ColorScheme scheme = createScheme(seedColor, brightness);
+    return createThemeData(scheme);
   }
 
-  static ColorScheme _createScheme(Color seedColor, Brightness brightness) {
+  static ColorScheme createScheme(Color seedColor, Brightness brightness) {
     return ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: brightness,
     );
   }
 
-  static ThemeData _createThemeData(ColorScheme scheme) {
+  static ThemeData createThemeData(ColorScheme scheme) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: scheme,
@@ -22,6 +22,7 @@ abstract final class AppTheme {
       elevatedButtonTheme: _createElevatedButtonThemeData(scheme),
       listTileTheme: _createListTileThemeData(scheme),
       appBarTheme: _createAppBarTheme(scheme),
+      floatingActionButtonTheme: _createFloatingActionButtonTheme(scheme),
     );
   }
 
@@ -49,8 +50,8 @@ abstract final class AppTheme {
           Radius.circular(12),
         ),
       ),
-      tileColor: scheme.surfaceVariant,
-      textColor: scheme.onSurfaceVariant,
+      tileColor: scheme.primaryContainer,
+      textColor: scheme.onPrimaryContainer,
     );
   }
 
@@ -65,6 +66,15 @@ abstract final class AppTheme {
           scheme.brightness,
         ),
       ),
+    );
+  }
+
+  static FloatingActionButtonThemeData _createFloatingActionButtonTheme(
+    ColorScheme scheme,
+  ) {
+    return FloatingActionButtonThemeData(
+      backgroundColor: scheme.tertiaryContainer,
+      foregroundColor: scheme.onTertiaryContainer,
     );
   }
 
