@@ -18,14 +18,18 @@ class PasswordFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentFocusNode = focusNode ?? FocusNode();
     return TextFormField(
       keyboardType: TextInputType.visiblePassword,
       autofillHints: autofillHints,
       obscureText: true,
       controller: controller,
       decoration: InputDecoration(labelText: labelText ?? 'Senha'),
-      focusNode: focusNode,
+      focusNode: currentFocusNode,
       onFieldSubmitted: onFieldSubmitted,
+      onTapOutside: (event) {
+        currentFocusNode.unfocus();
+      },
     );
   }
 }

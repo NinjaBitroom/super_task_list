@@ -9,20 +9,22 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SystemThemeBuilder(
-      builder: (context, accent) => MaterialApp.router(
-        title: 'Super Lista de Tarefas',
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        darkTheme: AppTheme.createTheme(
-          accent.accent,
-          Brightness.dark,
-        ),
-        theme: AppTheme.createTheme(
-          accent.accent,
-          Brightness.light,
-        ),
-        routerConfig: AppRoutes.router,
-      ),
+      builder: (context, accent) {
+        return MaterialApp.router(
+          title: 'Super Lista de Tarefas',
+          debugShowCheckedModeBanner: false,
+          themeMode: ThemeMode.system,
+          darkTheme: AppTheme.createTheme(
+            accent.accent,
+            Brightness.dark,
+          ),
+          theme: AppTheme.createTheme(
+            accent.accent,
+            Brightness.light,
+          ),
+          routerConfig: AppRoutes.router,
+        );
+      },
     );
   }
 }

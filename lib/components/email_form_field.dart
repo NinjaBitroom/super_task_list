@@ -8,13 +8,17 @@ class EmailFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final focusNode = FocusNode();
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofillHints: const [AutofillHints.email],
       controller: controller,
       decoration: const InputDecoration(labelText: 'E-mail'),
-      autofocus: true,
       onFieldSubmitted: onFieldSubmitted,
+      focusNode: focusNode,
+      onTapOutside: (event) {
+        focusNode.unfocus();
+      },
     );
   }
 }
