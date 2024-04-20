@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PasswordFormField extends StatelessWidget {
+final class PasswordFormField extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String)? onFieldSubmitted;
   final FocusNode? focusNode;

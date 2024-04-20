@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomProgressIndicator extends StatelessWidget {
+final class CustomProgressIndicator extends StatelessWidget {
   const CustomProgressIndicator({super.key});
 
   @override

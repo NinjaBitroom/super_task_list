@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 
-class TaskListView extends StatefulWidget {
+final class TaskListView extends StatefulWidget {
   final List<TaskModel> tasks;
   final Future<void> Function() notifyParent;
 
@@ -13,14 +13,13 @@ class TaskListView extends StatefulWidget {
   State<TaskListView> createState() => _TaskListViewState();
 }
 
-class _TaskListViewState extends State<TaskListView> {
+final class _TaskListViewState extends State<TaskListView> {
   Future<void> _updateTask(
     BuildContext context,
     TextEditingController controller,
     int index,
   ) async {
-    final db = DBOperations();
-    await db.updateTask(
+    await DBOperations.updateTask(
       widget.tasks[index].id,
       newTitle: controller.text,
     );
@@ -92,8 +91,8 @@ class _TaskListViewState extends State<TaskListView> {
                                 ),
                               ),
                               onPressed: () async {
-                                final db = DBOperations();
-                                await db.deleteTask(widget.tasks[index].id);
+                                await DBOperations.deleteTask(
+                                    widget.tasks[index].id);
                                 await widget.notifyParent();
                                 if (!context.mounted) return;
                                 Navigator.pop(context);
@@ -113,8 +112,10 @@ class _TaskListViewState extends State<TaskListView> {
           title: Text(widget.tasks[index].title),
           value: widget.tasks[index].done,
           onChanged: (value) async {
-            final db = DBOperations();
-            await db.updateTask(widget.tasks[index].id, newDone: value);
+            await DBOperations.updateTask(
+              widget.tasks[index].id,
+              newDone: value,
+            );
             await widget.notifyParent();
           },
         ),

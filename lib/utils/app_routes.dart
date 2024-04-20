@@ -6,7 +6,7 @@ import 'package:super_task_list/pages/reset_password_page.dart';
 import 'package:super_task_list/pages/sign_in_page.dart';
 import 'package:super_task_list/pages/sign_up_page.dart';
 
-final class AppRoutes {
+abstract final class AppRoutes {
   static final router = _createRouter();
   static const homePage = '/';
   static const signInPage = '/signInPage';
@@ -21,8 +21,7 @@ final class AppRoutes {
           path: homePage,
           builder: (context, state) => const HomePage(),
           redirect: (context, state) {
-            final db = DBOperations();
-            final auth = db.db.auth;
+            final auth = DBOperations.db.auth;
             if ((auth.currentUser == null) || (auth.currentSession == null)) {
               return signInPage;
             }

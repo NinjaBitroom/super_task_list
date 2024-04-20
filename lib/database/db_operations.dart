@@ -2,28 +2,28 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:super_task_list/models/task_model.dart';
 import 'package:super_task_list/utils/app_routes.dart';
 
-final class DBOperations {
-  final db = Supabase.instance.client;
+abstract final class DBOperations {
+  static final db = Supabase.instance.client;
 
-  Future<AuthResponse> signUp(String email, String password) async {
+  static Future<AuthResponse> signUp(String email, String password) async {
     return await db.auth.signUp(
       email: email,
       password: password,
     );
   }
 
-  Future<AuthResponse> signIn(String email, String password) async {
+  static Future<AuthResponse> signIn(String email, String password) async {
     return await db.auth.signInWithPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<void> signOut() async {
+  static Future<void> signOut() async {
     await db.auth.signOut();
   }
 
-  Future<void> sendPasswordResetEmail(String email) async {
+  static Future<void> sendPasswordResetEmail(String email) async {
     const baseURL = 'io.github.ninjabitroom://super_task_list';
     await db.auth.resetPasswordForEmail(
       email,
@@ -31,18 +31,19 @@ final class DBOperations {
     );
   }
 
-  Future<void> resetPassword(String newPassword) async {
+  static Future<void> resetPassword(String newPassword) async {
     await db.auth.updateUser(UserAttributes(password: newPassword));
   }
 
-  Future<void> createTask(String title) async {
+  static Future<void> createTask(String title) async {
     await db.from('tasks').insert({
       'title': title,
       'user': db.auth.currentUser?.id,
     });
   }
 
-  Future<void> updateTask(int id, {String? newTitle, bool? newDone}) async {
+  static Future<void> updateTask(int id,
+      {String? newTitle, bool? newDone}) async {
     final dict = {};
     if (newTitle != null) {
       dict['title'] = newTitle;
@@ -53,11 +54,11 @@ final class DBOperations {
     await db.from('tasks').update(dict).match({'id': id});
   }
 
-  Future<void> deleteTask(int id) async {
+  static Future<void> deleteTask(int id) async {
     await db.from('tasks').delete().match({'id': id});
   }
 
-  Future<List<TaskModel>> getTasks() async {
+  static Future<List<TaskModel>> getTasks() async {
     final json = await db
         .from('tasks')
         .select()

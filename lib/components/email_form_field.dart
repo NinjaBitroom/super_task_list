@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EmailFormField extends StatelessWidget {
+final class EmailFormField extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String)? onFieldSubmitted;
 

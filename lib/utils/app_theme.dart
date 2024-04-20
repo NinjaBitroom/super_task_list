@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-final class AppTheme {
+abstract final class AppTheme {
   static ThemeData createTheme(Color seedColor, Brightness brightness) {
     final ColorScheme scheme = _createScheme(seedColor, brightness);
     return _createThemeData(scheme);

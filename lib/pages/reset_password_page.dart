@@ -12,9 +12,8 @@ final class ResetPasswordPage extends StatelessWidget {
 
   Future<void> _tryResetPassword(BuildContext context) async {
     String message = 'A senha foi alterada com sucesso';
-    final db = DBOperations();
     try {
-      await db.resetPassword(_newPasswordController.text);
+      await DBOperations.resetPassword(_newPasswordController.text);
       if (!context.mounted) return;
       context.go(AppRoutes.homePage);
     } catch (e, t) {

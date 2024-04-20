@@ -10,9 +10,8 @@ final class ForgotPasswordPage extends StatelessWidget {
 
   Future<void> _tryRecoverPassword(BuildContext context) async {
     String message = 'Um e-mail foi enviado para a recuperação da senha';
-    final db = DBOperations();
     try {
-      await db.sendPasswordResetEmail(_emailController.text);
+      await DBOperations.sendPasswordResetEmail(_emailController.text);
     } catch (error) {
       message = '$error';
     }

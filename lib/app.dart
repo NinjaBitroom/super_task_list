@@ -3,7 +3,7 @@ import 'package:super_task_list/utils/app_routes.dart';
 import 'package:super_task_list/utils/app_theme.dart';
 import 'package:system_theme/system_theme.dart';
 
-class App extends StatelessWidget {
+final class App extends StatelessWidget {
   const App({super.key});
 
   @override

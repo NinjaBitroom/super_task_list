@@ -7,19 +7,18 @@ import 'package:super_task_list/models/task_model.dart';
 import 'package:super_task_list/pages/base_page.dart';
 import 'package:super_task_list/utils/app_routes.dart';
 
-class HomePage extends StatefulWidget {
+final class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+final class _HomePageState extends State<HomePage> {
   List<TaskModel>? _tasks;
 
   Future<void> _updateTasks() async {
-    final db = DBOperations();
-    final taskList = await db.getTasks();
+    final taskList = await DBOperations.getTasks();
     setState(() {
       _tasks = taskList;
     });
@@ -29,8 +28,7 @@ class _HomePageState extends State<HomePage> {
     BuildContext context,
     TextEditingController controller,
   ) async {
-    final db = DBOperations();
-    await db.createTask(controller.text);
+    await DBOperations.createTask(controller.text);
     await _updateTasks();
     if (!context.mounted) return;
     Navigator.pop(context);
@@ -57,8 +55,7 @@ class _HomePageState extends State<HomePage> {
       title: 'Suas Tarefas',
       leading: IconButton(
         onPressed: () {
-          final db = DBOperations();
-          db.signOut();
+          DBOperations.signOut();
           context.go(AppRoutes.signInPage);
         },
         icon: const Icon(Icons.logout),

@@ -14,8 +14,7 @@ final class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
 
   void _trySignUp(BuildContext context) {
-    final db = DBOperations();
-    final signUp = db.signUp(
+    final signUp = DBOperations.signUp(
       _emailController.text,
       _passwordController.text,
     );
