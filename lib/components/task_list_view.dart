@@ -41,8 +41,8 @@ class _TaskListViewState extends State<TaskListView> {
       itemCount: widget.tasks.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(bottom: 12),
-        child: ListTile(
-          leading: IconButton(
+        child: CheckboxListTile(
+          secondary: IconButton(
             onPressed: () async {
               final titleController = TextEditingController(
                 text: widget.tasks[index].title,
@@ -111,14 +111,12 @@ class _TaskListViewState extends State<TaskListView> {
             icon: const Icon(Icons.edit),
           ),
           title: Text(widget.tasks[index].title),
-          trailing: Checkbox(
-            value: widget.tasks[index].done,
-            onChanged: (value) async {
-              final db = DBOperations();
-              await db.updateTask(widget.tasks[index].id, newDone: value);
-              await widget.notifyParent();
-            },
-          ),
+          value: widget.tasks[index].done,
+          onChanged: (value) async {
+            final db = DBOperations();
+            await db.updateTask(widget.tasks[index].id, newDone: value);
+            await widget.notifyParent();
+          },
         ),
       ),
     );
