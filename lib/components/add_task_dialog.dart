@@ -11,11 +11,11 @@ class AddTaskDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final titleController = TextEditingController();
     return Dialog(
-      child: Container(
-        height: 200,
-        padding: const EdgeInsets.all(12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: titleController,
@@ -28,6 +28,7 @@ class AddTaskDialog extends StatelessWidget {
               ),
               autofocus: true,
             ),
+            const SizedBox(height: 12),
             ElevatedButton(
               onPressed: () async {
                 await notifyParent(context, titleController);

@@ -23,11 +23,11 @@ class EditTaskDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final titleController = TextEditingController(text: task.title);
     return Dialog(
-      child: Container(
-        height: 200,
-        padding: const EdgeInsets.all(12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: titleController,
@@ -40,6 +40,7 @@ class EditTaskDialog extends StatelessWidget {
                 labelText: 'Editar Tarefa',
               ),
             ),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
