@@ -42,15 +42,7 @@ final class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget body;
-    if (_tasks != null) {
-      body = TaskListView(
-        tasks: _tasks!,
-        notifyParent: _updateTasks,
-      );
-    } else {
-      body = const CustomProgressIndicator();
-    }
+    final areTasksNull = (_tasks == null);
     return BasePage(
       title: 'Suas Tarefas',
       leading: IconButton(
@@ -97,7 +89,12 @@ final class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      child: body,
+      child: areTasksNull
+          ? const CustomProgressIndicator()
+          : TaskListView(
+              tasks: _tasks!,
+              notifyParent: _updateTasks,
+            ),
     );
   }
 }
