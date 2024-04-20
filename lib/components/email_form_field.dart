@@ -13,7 +13,10 @@ final class EmailFormField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       autofillHints: const [AutofillHints.email],
       controller: controller,
-      decoration: const InputDecoration(labelText: 'E-mail'),
+      decoration: const InputDecoration(
+        labelText: 'E-mail',
+        prefixIcon: Icon(Icons.email),
+      ),
       onFieldSubmitted: onFieldSubmitted,
       focusNode: focusNode,
       onTapOutside: (event) {

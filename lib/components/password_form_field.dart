@@ -24,7 +24,10 @@ final class PasswordFormField extends StatelessWidget {
       autofillHints: autofillHints,
       obscureText: true,
       controller: controller,
-      decoration: InputDecoration(labelText: labelText ?? 'Senha'),
+      decoration: InputDecoration(
+        labelText: labelText ?? 'Senha',
+        prefixIcon: const Icon(Icons.password),
+      ),
       focusNode: currentFocusNode,
       onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) {
