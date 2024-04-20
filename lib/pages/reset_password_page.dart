@@ -16,7 +16,7 @@ final class ResetPasswordPage extends StatelessWidget {
     try {
       await db.resetPassword(_newPasswordController.text);
       if (!context.mounted) return;
-      context.go(AppRoutes.signInPage);
+      context.go(AppRoutes.homePage);
     } catch (e, t) {
       debugPrint(t.toString());
       message = '$e';

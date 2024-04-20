@@ -44,11 +44,6 @@ final class AppRoutes {
         GoRoute(
           path: resetPasswordPage,
           builder: (context, state) => ResetPasswordPage(),
-          onExit: (context) async {
-            final db = DBOperations();
-            await db.signOut();
-            return true;
-          },
         ),
       ],
     );
