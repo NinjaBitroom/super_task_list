@@ -4,7 +4,7 @@ import 'package:super_task_list/models/task_model.dart';
 
 class TaskListView extends StatefulWidget {
   final List<TaskModel> tasks;
-  final Function() notifyParent;
+  final Future<void> Function() notifyParent;
 
   const TaskListView(
       {super.key, required this.tasks, required this.notifyParent});
@@ -24,7 +24,7 @@ class _TaskListViewState extends State<TaskListView> {
       widget.tasks[index].id,
       newTitle: controller.text,
     );
-    widget.notifyParent();
+    await widget.notifyParent();
     if (!context.mounted) return;
     Navigator.pop(context);
   }
@@ -94,7 +94,7 @@ class _TaskListViewState extends State<TaskListView> {
                               onPressed: () async {
                                 final db = DBOperations();
                                 await db.deleteTask(widget.tasks[index].id);
-                                widget.notifyParent();
+                                await widget.notifyParent();
                                 if (!context.mounted) return;
                                 Navigator.pop(context);
                               },
@@ -116,7 +116,7 @@ class _TaskListViewState extends State<TaskListView> {
             onChanged: (value) async {
               final db = DBOperations();
               await db.updateTask(widget.tasks[index].id, newDone: value);
-              widget.notifyParent();
+              await widget.notifyParent();
             },
           ),
         ),
