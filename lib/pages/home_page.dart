@@ -15,11 +15,12 @@ final class HomePage extends StatefulWidget {
 }
 
 final class _HomePageState extends State<HomePage> {
-  late Future<List<TaskModel>> _tasks;
+  List<TaskModel>? _tasks;
 
   Future<void> _updateTasks() async {
+    final tasks = await DBOperations.getTasks();
     setState(() {
-      _tasks = DBOperations.getTasks();
+      _tasks = tasks;
     });
   }
 
@@ -42,10 +43,21 @@ final class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: 'Suas Tarefas',
       leading: const SignOutButton(),
+      title: 'Suas Tarefas',
+      actions: [
+        IconButton(
+          onPressed: () {
+            setState(() {
+              _tasks = null;
+            });
+            _updateTasks();
+          },
+          icon: const Icon(Icons.restart_alt),
+        )
+      ],
       floatingActionButton: AddTaskButton(notifyParent: _addTask),
-      child: FutureBuilder(
+      child: StreamBuilder(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return TaskListView(
@@ -57,7 +69,7 @@ final class _HomePageState extends State<HomePage> {
           }
           return const CustomProgressIndicator();
         },
-        future: _tasks,
+        stream: Stream.periodic(Durations.short4, (computationCount) => _tasks),
       ),
     );
   }

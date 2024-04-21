@@ -6,6 +6,7 @@ final class BasePage extends StatelessWidget {
   final Widget? leading;
   final bool? automaticallyImplyLeading;
   final Widget? floatingActionButton;
+  final List<Widget>? actions;
 
   const BasePage({
     super.key,
@@ -14,6 +15,7 @@ final class BasePage extends StatelessWidget {
     this.leading,
     this.automaticallyImplyLeading,
     this.floatingActionButton,
+    this.actions,
   });
 
   @override
@@ -23,6 +25,7 @@ final class BasePage extends StatelessWidget {
         automaticallyImplyLeading: automaticallyImplyLeading ?? true,
         leading: leading,
         title: Text(title),
+        actions: actions,
       ),
       body: child,
       floatingActionButton: floatingActionButton,
