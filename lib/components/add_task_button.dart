@@ -5,9 +5,9 @@ final class AddTaskButton extends StatelessWidget {
   final Future<void> Function(
     BuildContext context,
     TextEditingController controller,
-  ) notifyParent;
+  ) addTask;
 
-  const AddTaskButton({super.key, required this.notifyParent});
+  const AddTaskButton({super.key, required this.addTask});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ final class AddTaskButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (context) => AddTaskDialog(notifyParent: notifyParent),
+          builder: (context) => AddTaskDialog(addTask: addTask),
         );
       },
       child: const Icon(Icons.add),

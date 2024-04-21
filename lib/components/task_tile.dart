@@ -10,15 +10,15 @@ final class TaskTile extends StatefulWidget {
     BuildContext context,
     TextEditingController controller,
     int index,
-  ) notifyParent;
-  final Future<void> Function() notifyGrandParent;
+  ) updateTask;
+  final Future<void> Function() updateTasks;
 
   const TaskTile(
       {super.key,
       required this.task,
       required this.index,
-      required this.notifyParent,
-      required this.notifyGrandParent});
+      required this.updateTask,
+      required this.updateTasks});
 
   @override
   State<TaskTile> createState() => _TaskTileState();
@@ -38,8 +38,8 @@ final class _TaskTileState extends State<TaskTile> {
             builder: (context) => EditTaskDialog(
               task: widget.task,
               index: widget.index,
-              notifyGrandParent: widget.notifyParent,
-              notifyGrandGrandParent: widget.notifyGrandParent,
+              updateTask: widget.updateTask,
+              updateTasks: widget.updateTasks,
             ),
           );
         },
@@ -56,7 +56,7 @@ final class _TaskTileState extends State<TaskTile> {
           widget.task.id,
           newDone: value,
         );
-        await widget.notifyGrandParent();
+        await widget.updateTasks();
         setState(() {
           _enabled = true;
         });

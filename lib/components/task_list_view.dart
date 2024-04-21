@@ -5,10 +5,10 @@ import 'package:super_task_list/models/task_model.dart';
 
 final class TaskListView extends StatefulWidget {
   final List<TaskModel> tasks;
-  final Future<void> Function() notifyParent;
+  final Future<void> Function() updateTasks;
 
   const TaskListView(
-      {super.key, required this.tasks, required this.notifyParent});
+      {super.key, required this.tasks, required this.updateTasks});
 
   @override
   State<TaskListView> createState() => _TaskListViewState();
@@ -28,7 +28,7 @@ final class _TaskListViewState extends State<TaskListView> {
       widget.tasks[index].id,
       newTitle: controller.text,
     );
-    await widget.notifyParent();
+    await widget.updateTasks();
   }
 
   @override
@@ -45,8 +45,8 @@ final class _TaskListViewState extends State<TaskListView> {
               child: TaskTile(
                 task: widget.tasks[index],
                 index: index,
-                notifyParent: _updateTask,
-                notifyGrandParent: widget.notifyParent,
+                updateTask: _updateTask,
+                updateTasks: widget.updateTasks,
               ),
             ),
           );

@@ -9,15 +9,15 @@ class EditTaskDialog extends StatefulWidget {
     BuildContext context,
     TextEditingController controller,
     int index,
-  ) notifyGrandParent;
-  final Future<void> Function() notifyGrandGrandParent;
+  ) updateTask;
+  final Future<void> Function() updateTasks;
 
   const EditTaskDialog(
       {super.key,
       required this.task,
       required this.index,
-      required this.notifyGrandParent,
-      required this.notifyGrandGrandParent});
+      required this.updateTask,
+      required this.updateTasks});
 
   @override
   State<EditTaskDialog> createState() => _EditTaskDialogState();
@@ -38,8 +38,11 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
               controller: titleController,
               autofocus: true,
               onSubmitted: (value) async {
-                await widget.notifyGrandParent(
-                    context, titleController, widget.index);
+                await widget.updateTask(
+                  context,
+                  titleController,
+                  widget.index,
+                );
               },
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
@@ -52,7 +55,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    await widget.notifyGrandParent(
+                    await widget.updateTask(
                       context,
                       titleController,
                       widget.index,
@@ -71,7 +74,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
                   ),
                   onPressed: () async {
                     await DBOperations.deleteTask(widget.task.id);
-                    await widget.notifyGrandGrandParent();
+                    await widget.updateTasks();
                     if (!context.mounted) return;
                     Navigator.pop(context);
                   },

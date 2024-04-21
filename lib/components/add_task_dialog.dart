@@ -4,9 +4,9 @@ final class AddTaskDialog extends StatelessWidget {
   final Future<void> Function(
     BuildContext context,
     TextEditingController controller,
-  ) notifyParent;
+  ) addTask;
 
-  const AddTaskDialog({super.key, required this.notifyParent});
+  const AddTaskDialog({super.key, required this.addTask});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ final class AddTaskDialog extends StatelessWidget {
             TextField(
               controller: titleController,
               onSubmitted: (value) async {
-                await notifyParent(context, titleController);
+                await addTask(context, titleController);
               },
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
@@ -32,7 +32,7 @@ final class AddTaskDialog extends StatelessWidget {
             const SizedBox(height: 12),
             ElevatedButton(
               onPressed: () async {
-                await notifyParent(context, titleController);
+                await addTask(context, titleController);
               },
               child: const Text('Salvar'),
             )

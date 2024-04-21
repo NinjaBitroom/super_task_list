@@ -57,20 +57,20 @@ final class _HomePageState extends State<HomePage> {
           icon: const Icon(Icons.restart_alt),
         )
       ],
-      floatingActionButton: AddTaskButton(notifyParent: _addTask),
+      floatingActionButton: AddTaskButton(addTask: _addTask),
       child: StreamBuilder(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return TaskListView(
               tasks: snapshot.data!,
-              notifyParent: _updateTasks,
+              updateTasks: _updateTasks,
             );
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
           return const CustomProgressIndicator();
         },
-        stream: Stream.periodic(Durations.short4, (computationCount) => _tasks),
+        stream: Stream.periodic(Durations.short1, (computationCount) => _tasks),
       ),
     );
   }
