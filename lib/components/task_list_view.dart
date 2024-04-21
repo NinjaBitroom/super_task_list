@@ -20,13 +20,15 @@ final class _TaskListViewState extends State<TaskListView> {
     TextEditingController controller,
     int index,
   ) async {
+    setState(() {
+      widget.tasks[index].title = controller.text;
+    });
+    Navigator.pop(context);
     await DBOperations.updateTask(
       widget.tasks[index].id,
       newTitle: controller.text,
     );
     await widget.notifyParent();
-    if (!context.mounted) return;
-    Navigator.pop(context);
   }
 
   @override

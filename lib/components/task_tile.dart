@@ -3,7 +3,7 @@ import 'package:super_task_list/components/edit_task_dialog.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 
-class TaskTile extends StatelessWidget {
+final class TaskTile extends StatefulWidget {
   final TaskModel task;
   final int index;
   final Future<void> Function(
@@ -21,30 +21,45 @@ class TaskTile extends StatelessWidget {
       required this.notifyGrandParent});
 
   @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+final class _TaskTileState extends State<TaskTile> {
+  bool _enabled = true;
+
+  @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
+      key: Key(widget.task.id.toString()),
       secondary: IconButton(
         onPressed: () async {
           showDialog(
             context: context,
             builder: (context) => EditTaskDialog(
-              task: task,
-              index: index,
-              notifyGrandParent: notifyParent,
-              notifyGrandGrandParent: notifyGrandParent,
+              task: widget.task,
+              index: widget.index,
+              notifyGrandParent: widget.notifyParent,
+              notifyGrandGrandParent: widget.notifyGrandParent,
             ),
           );
         },
         icon: const Icon(Icons.edit),
       ),
-      title: Text(task.title),
-      value: task.done,
+      title: Text(widget.task.title),
+      value: widget.task.done,
+      enabled: _enabled,
       onChanged: (value) async {
+        setState(() {
+          _enabled = false;
+        });
         await DBOperations.updateTask(
-          task.id,
+          widget.task.id,
           newDone: value,
         );
-        await notifyGrandParent();
+        await widget.notifyGrandParent();
+        setState(() {
+          _enabled = true;
+        });
       },
     );
   }

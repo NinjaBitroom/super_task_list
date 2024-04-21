@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AddTaskDialog extends StatelessWidget {
+final class AddTaskDialog extends StatelessWidget {
   final Future<void> Function(
     BuildContext context,
     TextEditingController controller,
   ) notifyParent;
+
   const AddTaskDialog({super.key, required this.notifyParent});
 
   @override

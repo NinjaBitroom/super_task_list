@@ -47,11 +47,12 @@ final class _HomePageState extends State<HomePage> {
       title: 'Suas Tarefas',
       actions: [
         IconButton(
-          onPressed: () {
+          onPressed: () async {
             setState(() {
               _tasks = null;
             });
-            _updateTasks();
+            await Future.delayed(Durations.extralong4);
+            await _updateTasks();
           },
           icon: const Icon(Icons.restart_alt),
         )

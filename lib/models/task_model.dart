@@ -1,8 +1,8 @@
 final class TaskModel {
   final int id;
   final DateTime createdAt;
-  final String title;
-  final bool done;
+  String title;
+  bool done;
   final String user;
 
   TaskModel({

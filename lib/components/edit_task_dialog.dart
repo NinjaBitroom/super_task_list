@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 
-class EditTaskDialog extends StatelessWidget {
+class EditTaskDialog extends StatefulWidget {
   final TaskModel task;
   final int index;
   final Future<void> Function(
@@ -20,8 +20,13 @@ class EditTaskDialog extends StatelessWidget {
       required this.notifyGrandGrandParent});
 
   @override
+  State<EditTaskDialog> createState() => _EditTaskDialogState();
+}
+
+final class _EditTaskDialogState extends State<EditTaskDialog> {
+  @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController(text: task.title);
+    final titleController = TextEditingController(text: widget.task.title);
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -33,7 +38,8 @@ class EditTaskDialog extends StatelessWidget {
               controller: titleController,
               autofocus: true,
               onSubmitted: (value) async {
-                await notifyGrandParent(context, titleController, index);
+                await widget.notifyGrandParent(
+                    context, titleController, widget.index);
               },
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
@@ -46,10 +52,10 @@ class EditTaskDialog extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    await notifyGrandParent(
+                    await widget.notifyGrandParent(
                       context,
                       titleController,
-                      index,
+                      widget.index,
                     );
                   },
                   child: const Text('Salvar'),
@@ -64,8 +70,8 @@ class EditTaskDialog extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    await DBOperations.deleteTask(task.id);
-                    await notifyGrandGrandParent();
+                    await DBOperations.deleteTask(widget.task.id);
+                    await widget.notifyGrandGrandParent();
                     if (!context.mounted) return;
                     Navigator.pop(context);
                   },
