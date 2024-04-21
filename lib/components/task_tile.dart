@@ -50,7 +50,6 @@ final class _TaskTileState extends State<TaskTile> {
           widget.task.id,
           newDone: value,
         );
-        // await widget.updateTasks();
       },
     );
   }

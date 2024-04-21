@@ -34,6 +34,7 @@ abstract final class TaskService {
     return await DBOperations.updateTask(
       task!.id,
       newTitle: newTitle,
+      newDone: newDone,
     );
   }
 
