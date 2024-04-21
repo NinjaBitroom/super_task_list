@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:super_task_list/components/task_tile.dart';
-import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
+import 'package:super_task_list/services/task_service.dart';
 
 final class TaskListView extends StatefulWidget {
   final List<TaskModel> tasks;
-  final Future<void> Function() updateTasks;
+  final Future<void> Function() loadTasks;
 
-  const TaskListView(
-      {super.key, required this.tasks, required this.updateTasks});
+  const TaskListView({super.key, required this.tasks, required this.loadTasks});
 
   @override
   State<TaskListView> createState() => _TaskListViewState();
@@ -20,15 +19,11 @@ final class _TaskListViewState extends State<TaskListView> {
     TextEditingController controller,
     int index,
   ) async {
-    setState(() {
-      widget.tasks[index].title = controller.text;
-    });
     Navigator.pop(context);
-    await DBOperations.updateTask(
+    await TaskService.updateTask(
       widget.tasks[index].id,
       newTitle: controller.text,
     );
-    await widget.updateTasks();
   }
 
   @override
@@ -46,7 +41,7 @@ final class _TaskListViewState extends State<TaskListView> {
                 task: widget.tasks[index],
                 index: index,
                 updateTask: _updateTask,
-                updateTasks: widget.updateTasks,
+                updateTasks: widget.loadTasks,
               ),
             ),
           );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:super_task_list/components/edit_task_dialog.dart';
-import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
+import 'package:super_task_list/services/task_service.dart';
 
 final class TaskTile extends StatefulWidget {
   final TaskModel task;
@@ -25,8 +25,6 @@ final class TaskTile extends StatefulWidget {
 }
 
 final class _TaskTileState extends State<TaskTile> {
-  bool _enabled = true;
-
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
@@ -47,19 +45,12 @@ final class _TaskTileState extends State<TaskTile> {
       ),
       title: Text(widget.task.title),
       value: widget.task.done,
-      enabled: _enabled,
       onChanged: (value) async {
-        setState(() {
-          _enabled = false;
-        });
-        await DBOperations.updateTask(
+        await TaskService.updateTask(
           widget.task.id,
           newDone: value,
         );
-        await widget.updateTasks();
-        setState(() {
-          _enabled = true;
-        });
+        // await widget.updateTasks();
       },
     );
   }

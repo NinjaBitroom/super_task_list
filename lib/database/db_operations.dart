@@ -35,15 +35,25 @@ abstract final class DBOperations {
     await db.auth.updateUser(UserAttributes(password: newPassword));
   }
 
-  static Future<void> createTask(String title) async {
-    await db.from('tasks').insert({
-      'title': title,
-      'user': db.auth.currentUser?.id,
-    });
+  static Future<TaskModel> createTask(String title) async {
+    final newTask = TaskModel.fromJson(
+      await db
+          .from('tasks')
+          .insert({
+            'title': title,
+            'user': db.auth.currentUser?.id,
+          })
+          .select()
+          .single(),
+    );
+    return newTask;
   }
 
-  static Future<void> updateTask(int id,
-      {String? newTitle, bool? newDone}) async {
+  static Future<TaskModel> updateTask(
+    int id, {
+    String? newTitle,
+    bool? newDone,
+  }) async {
     final dict = {};
     if (newTitle != null) {
       dict['title'] = newTitle;
@@ -52,6 +62,9 @@ abstract final class DBOperations {
       dict['done'] = newDone;
     }
     await db.from('tasks').update(dict).match({'id': id});
+    return TaskModel.fromJson(
+      await db.from('tasks').select().match({'id': id}).single(),
+    );
   }
 
   static Future<void> deleteTask(int id) async {
@@ -62,9 +75,7 @@ abstract final class DBOperations {
     final json = await db
         .from('tasks')
         .select()
-        .eq('user', db.auth.currentUser?.id as Object)
-        .order('done', ascending: true)
-        .order('id', ascending: true);
+        .eq('user', db.auth.currentUser?.id as Object);
     final tasks = <TaskModel>[];
     for (final task in json) {
       tasks.add(TaskModel.fromJson(task));

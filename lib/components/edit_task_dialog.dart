@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
+import 'package:super_task_list/services/task_service.dart';
 
 class EditTaskDialog extends StatefulWidget {
   final TaskModel task;
@@ -73,10 +73,8 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
                     ),
                   ),
                   onPressed: () async {
-                    await DBOperations.deleteTask(widget.task.id);
-                    await widget.updateTasks();
-                    if (!context.mounted) return;
                     Navigator.pop(context);
+                    await TaskService.deleteTask(widget.task.id);
                   },
                   child: const Text('Deletar'),
                 ),

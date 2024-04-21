@@ -4,8 +4,8 @@ import 'package:super_task_list/components/custom_progress_indicator.dart';
 import 'package:super_task_list/components/sign_out_button.dart';
 import 'package:super_task_list/components/task_list_view.dart';
 import 'package:super_task_list/database/db_operations.dart';
-import 'package:super_task_list/models/task_model.dart';
 import 'package:super_task_list/pages/base_page.dart';
+import 'package:super_task_list/services/task_service.dart';
 
 final class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,12 +15,13 @@ final class HomePage extends StatefulWidget {
 }
 
 final class _HomePageState extends State<HomePage> {
-  List<TaskModel>? _tasks;
-
-  Future<void> _updateTasks() async {
+  Future<void> _loadTasks() async {
     final tasks = await DBOperations.getTasks();
     setState(() {
-      _tasks = tasks;
+      TaskService.tasks = tasks;
+      TaskService.tasks?.sort(
+        (a, b) => a.id.compareTo(b.id),
+      );
     });
   }
 
@@ -28,16 +29,16 @@ final class _HomePageState extends State<HomePage> {
     BuildContext context,
     TextEditingController controller,
   ) async {
-    await DBOperations.createTask(controller.text);
-    await _updateTasks();
-    if (!context.mounted) return;
     Navigator.pop(context);
+    await TaskService.createTask(controller.text);
+    // await _loadTasks();
+    // if (!context.mounted) return;
   }
 
   @override
   void initState() {
     super.initState();
-    _updateTasks();
+    _loadTasks();
   }
 
   @override
@@ -49,10 +50,10 @@ final class _HomePageState extends State<HomePage> {
         IconButton(
           onPressed: () async {
             setState(() {
-              _tasks = null;
+              TaskService.tasks = null;
             });
             await Future.delayed(Durations.extralong4);
-            await _updateTasks();
+            await _loadTasks();
           },
           icon: const Icon(Icons.restart_alt),
         )
@@ -63,14 +64,15 @@ final class _HomePageState extends State<HomePage> {
           if (snapshot.hasData) {
             return TaskListView(
               tasks: snapshot.data!,
-              updateTasks: _updateTasks,
+              loadTasks: _loadTasks,
             );
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
           return const CustomProgressIndicator();
         },
-        stream: Stream.periodic(Durations.short1, (computationCount) => _tasks),
+        stream: Stream.periodic(
+            Durations.short1, (computationCount) => TaskService.tasks),
       ),
     );
   }
