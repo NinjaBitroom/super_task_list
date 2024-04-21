@@ -27,62 +27,57 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
   @override
   Widget build(BuildContext context) {
     final titleController = TextEditingController(text: widget.task.title);
-    return Dialog(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+    return SimpleDialog(
+      contentPadding: const EdgeInsets.all(12),
+      title: const Text('Editar tarefa'),
+      children: [
+        TextField(
+          controller: titleController,
+          autofocus: true,
+          onSubmitted: (value) async {
+            await widget.updateTask(
+              context,
+              titleController,
+              widget.index,
+            );
+          },
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Nome da tarefa',
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            TextField(
-              controller: titleController,
-              autofocus: true,
-              onSubmitted: (value) async {
+            ElevatedButton(
+              onPressed: () async {
                 await widget.updateTask(
                   context,
                   titleController,
                   widget.index,
                 );
               },
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Editar Tarefa',
-              ),
+              child: const Text('Salvar'),
             ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await widget.updateTask(
-                      context,
-                      titleController,
-                      widget.index,
-                    );
-                  },
-                  child: const Text('Salvar'),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.secondaryContainer,
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.secondaryContainer,
-                    ),
-                    foregroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
-                  ),
-                  onPressed: () async {
-                    Navigator.pop(context);
-                    await TaskService.deleteTask(widget.task.id);
-                  },
-                  child: const Text('Deletar'),
+                foregroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
-              ],
-            )
+              ),
+              onPressed: () async {
+                Navigator.pop(context);
+                await TaskService.deleteTask(widget.task.id);
+              },
+              child: const Text('Deletar'),
+            ),
           ],
-        ),
-      ),
+        )
+      ],
     );
   }
 }
