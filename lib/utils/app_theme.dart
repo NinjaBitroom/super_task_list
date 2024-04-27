@@ -58,10 +58,13 @@ abstract final class AppTheme {
   static AppBarTheme _createAppBarTheme(ColorScheme scheme) {
     return AppBarTheme(
       centerTitle: true,
+      scrolledUnderElevation: 0,
+      elevation: 0,
+      backgroundColor: scheme.background.withOpacity(0.5),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: scheme.background,
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
-        systemNavigationBarColor: scheme.background,
+        systemNavigationBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: _getReverseBrightness(
           scheme.brightness,
         ),

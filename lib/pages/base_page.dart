@@ -21,13 +21,18 @@ final class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: automaticallyImplyLeading ?? true,
         leading: leading,
         title: Text(title),
         actions: actions,
       ),
-      body: child,
+      body: SafeArea(
+        bottom: false,
+        child: child,
+      ),
       floatingActionButton: floatingActionButton,
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/task_model.dart';
 
@@ -9,6 +11,18 @@ abstract final class TaskService {
 
   static List<TaskModel>? get completedTasks =>
       tasks?.where((element) => element.done).toList();
+
+  static Stream<List<TaskModel>?> stream() async* {
+    List<TaskModel>? cachedTasks = tasks;
+    while (true) {
+      await Future.delayed(Duration.zero);
+      if (cachedTasks == tasks) {
+        continue;
+      }
+      cachedTasks = tasks;
+      yield tasks;
+    }
+  }
 
   static Future<TaskModel> createTask(String title) async {
     final newTask = await DBOperations.createTask(title);

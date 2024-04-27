@@ -16,13 +16,8 @@ final class HomePage extends StatefulWidget {
 
 final class _HomePageState extends State<HomePage> {
   Future<void> _loadTasks() async {
-    final tasks = await DBOperations.getTasks();
-    setState(() {
-      TaskService.tasks = tasks;
-      TaskService.tasks?.sort(
-        (a, b) => a.id.compareTo(b.id),
-      );
-    });
+    TaskService.tasks = await DBOperations.getTasks();
+    TaskService.tasks?.sort((a, b) => a.id.compareTo(b.id));
   }
 
   Future<void> _addTask(
@@ -31,8 +26,6 @@ final class _HomePageState extends State<HomePage> {
   ) async {
     Navigator.pop(context);
     await TaskService.createTask(controller.text);
-    // await _loadTasks();
-    // if (!context.mounted) return;
   }
 
   @override
@@ -71,8 +64,7 @@ final class _HomePageState extends State<HomePage> {
           }
           return const CustomProgressIndicator();
         },
-        stream: Stream.periodic(
-            Durations.short1, (computationCount) => TaskService.tasks),
+        stream: TaskService.stream(),
       ),
     );
   }
