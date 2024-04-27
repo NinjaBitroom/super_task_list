@@ -16,8 +16,11 @@ final class HomePage extends StatefulWidget {
 
 final class _HomePageState extends State<HomePage> {
   Future<void> _loadTasks() async {
-    TaskService.tasks = await DBOperations.getTasks();
-    TaskService.tasks?.sort((a, b) => a.id.compareTo(b.id));
+    final tasks = await DBOperations.getTasks();
+    setState(() {
+      TaskService.tasks = tasks;
+      TaskService.tasks?.sort((a, b) => a.id.compareTo(b.id));
+    });
   }
 
   Future<void> _addTask(
@@ -26,6 +29,7 @@ final class _HomePageState extends State<HomePage> {
   ) async {
     Navigator.pop(context);
     await TaskService.createTask(controller.text);
+    setState(() {});
   }
 
   @override

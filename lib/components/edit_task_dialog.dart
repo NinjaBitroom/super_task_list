@@ -72,6 +72,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
               onPressed: () async {
                 Navigator.pop(context);
                 await TaskService.deleteTask(widget.task.id);
+                setState(() {});
               },
               child: const Text('Deletar'),
             ),

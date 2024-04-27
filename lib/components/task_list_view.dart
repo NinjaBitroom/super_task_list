@@ -24,6 +24,7 @@ final class _TaskListViewState extends State<TaskListView> {
       widget.tasks[index].id,
       newTitle: controller.text,
     );
+    setState(() {});
   }
 
   @override
