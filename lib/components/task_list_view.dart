@@ -34,7 +34,9 @@ final class _TaskListViewState extends State<TaskListView> {
             child: Text('Você não possui nenhuma tarefa'),
           )
         : ListView.builder(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 72),
+            padding: MediaQuery.of(context)
+                .padding
+                .copyWith(bottom: 72, left: 12, right: 12),
             itemCount: widget.tasks.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(bottom: 12),

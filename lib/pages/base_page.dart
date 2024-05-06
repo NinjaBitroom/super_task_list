@@ -29,10 +29,7 @@ final class BasePage extends StatelessWidget {
         title: Text(title),
         actions: actions,
       ),
-      body: SafeArea(
-        bottom: false,
-        child: child,
-      ),
+      body: child,
       floatingActionButton: floatingActionButton,
     );
   }
