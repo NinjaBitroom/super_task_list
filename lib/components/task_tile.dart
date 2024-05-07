@@ -11,14 +11,14 @@ final class TaskTile extends StatefulWidget {
     TextEditingController controller,
     int index,
   ) updateTask;
-  final Future<void> Function() updateTasks;
+  final Future<void> Function() loadTasks;
 
   const TaskTile(
       {super.key,
       required this.task,
       required this.index,
       required this.updateTask,
-      required this.updateTasks});
+      required this.loadTasks});
 
   @override
   State<TaskTile> createState() => _TaskTileState();
@@ -37,7 +37,7 @@ final class _TaskTileState extends State<TaskTile> {
               task: widget.task,
               index: widget.index,
               updateTask: widget.updateTask,
-              updateTasks: widget.updateTasks,
+              loadTasks: widget.loadTasks,
             ),
           );
         },
@@ -50,6 +50,7 @@ final class _TaskTileState extends State<TaskTile> {
           widget.task.id,
           newDone: value,
         );
+        setState(() {});
       },
     );
   }

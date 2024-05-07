@@ -43,7 +43,7 @@ final class _TaskListViewState extends State<TaskListView> {
                 task: widget.tasks[index],
                 index: index,
                 updateTask: _updateTask,
-                updateTasks: widget.loadTasks,
+                loadTasks: widget.loadTasks,
               ),
             ),
           );
