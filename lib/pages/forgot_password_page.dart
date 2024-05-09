@@ -40,6 +40,7 @@ final class ForgotPasswordPage extends StatelessWidget {
               onFieldSubmitted: (value) async {
                 await _tryRecoverPassword(context);
               },
+              textInputAction: TextInputAction.send,
             ),
             const SizedBox(
               height: 12,

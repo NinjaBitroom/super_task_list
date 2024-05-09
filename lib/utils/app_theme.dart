@@ -64,7 +64,7 @@ abstract final class AppTheme {
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
-        systemNavigationBarColor: scheme.background.withOpacity(0.9),
+        systemNavigationBarColor: scheme.background.withOpacity(0.6),
         systemNavigationBarIconBrightness: _getReverseBrightness(
           scheme.brightness,
         ),
