@@ -35,7 +35,7 @@ final class _TaskListViewState extends State<TaskListView> {
           )
         : ListView.builder(
             padding: MediaQuery.paddingOf(context)
-                .add(const EdgeInsets.fromLTRB(12, 0, 12, 72)),
+                .add(const EdgeInsets.fromLTRB(12, 12, 12, 72)),
             itemCount: widget.tasks.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(bottom: 12),

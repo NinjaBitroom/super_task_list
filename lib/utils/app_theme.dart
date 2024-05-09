@@ -15,9 +15,7 @@ abstract final class AppTheme {
   }
 
   static ThemeData createThemeData(ColorScheme scheme) {
-    return ThemeData(
-      useMaterial3: true,
-      colorScheme: scheme,
+    return ThemeData.from(colorScheme: scheme, useMaterial3: true).copyWith(
       inputDecorationTheme: _createInputDecorationTheme(),
       elevatedButtonTheme: _createElevatedButtonThemeData(scheme),
       listTileTheme: _createListTileThemeData(scheme),
@@ -45,13 +43,17 @@ abstract final class AppTheme {
 
   static ListTileThemeData _createListTileThemeData(ColorScheme scheme) {
     return ListTileThemeData(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
-        ),
-      ),
+      shape: _createRoundedRectangleBorder(),
       tileColor: scheme.primaryContainer,
       textColor: scheme.onPrimaryContainer,
+    );
+  }
+
+  static RoundedRectangleBorder _createRoundedRectangleBorder() {
+    return const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(12),
+      ),
     );
   }
 
@@ -61,13 +63,17 @@ abstract final class AppTheme {
       scrolledUnderElevation: 0,
       elevation: 0,
       backgroundColor: scheme.background.withOpacity(0.9),
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
-        systemNavigationBarColor: scheme.background.withOpacity(0.6),
-        systemNavigationBarIconBrightness: _getReverseBrightness(
-          scheme.brightness,
-        ),
+      systemOverlayStyle: _createSystemUiOverlayStyle(scheme),
+    );
+  }
+
+  static SystemUiOverlayStyle _createSystemUiOverlayStyle(ColorScheme scheme) {
+    return SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
+      systemNavigationBarColor: scheme.background.withOpacity(0.6),
+      systemNavigationBarIconBrightness: _getReverseBrightness(
+        scheme.brightness,
       ),
     );
   }
