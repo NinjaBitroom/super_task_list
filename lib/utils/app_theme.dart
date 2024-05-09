@@ -60,11 +60,11 @@ abstract final class AppTheme {
       centerTitle: true,
       scrolledUnderElevation: 0,
       elevation: 0,
-      backgroundColor: scheme.background.withOpacity(0.5),
+      backgroundColor: scheme.background.withOpacity(0.9),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
-        systemNavigationBarColor: scheme.background.withOpacity(0.5),
+        systemNavigationBarColor: scheme.background.withOpacity(0.9),
         systemNavigationBarIconBrightness: _getReverseBrightness(
           scheme.brightness,
         ),
