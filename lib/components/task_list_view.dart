@@ -5,9 +5,8 @@ import 'package:super_task_list/services/task_service.dart';
 
 final class TaskListView extends StatefulWidget {
   final List<TaskModel> tasks;
-  final Future<void> Function() loadTasks;
 
-  const TaskListView({super.key, required this.tasks, required this.loadTasks});
+  const TaskListView({super.key, required this.tasks});
 
   @override
   State<TaskListView> createState() => _TaskListViewState();
@@ -43,7 +42,6 @@ final class _TaskListViewState extends State<TaskListView> {
                 task: widget.tasks[index],
                 index: index,
                 updateTask: _updateTask,
-                loadTasks: widget.loadTasks,
               ),
             ),
           );

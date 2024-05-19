@@ -3,6 +3,7 @@ import 'package:super_task_list/components/add_task_button.dart';
 import 'package:super_task_list/components/custom_progress_indicator.dart';
 import 'package:super_task_list/components/sign_out_button.dart';
 import 'package:super_task_list/components/task_list_view.dart';
+import 'package:super_task_list/components/task_widget.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
 import 'package:super_task_list/services/task_service.dart';
@@ -59,9 +60,13 @@ final class _HomePageState extends State<HomePage> {
       child: StreamBuilder(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return TaskListView(
+            return TaskWidget(
               tasks: snapshot.data!,
-              loadTasks: _loadTasks,
+              downloadTasks: _loadTasks,
+              addTask: _addTask,
+              child: TaskListView(
+                tasks: snapshot.data!,
+              ),
             );
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());

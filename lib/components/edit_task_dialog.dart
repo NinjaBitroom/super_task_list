@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_task_list/components/task_widget.dart';
 import 'package:super_task_list/models/task_model.dart';
 import 'package:super_task_list/services/task_service.dart';
 
@@ -10,14 +11,13 @@ class EditTaskDialog extends StatefulWidget {
     TextEditingController controller,
     int index,
   ) updateTask;
-  final Future<void> Function() loadTasks;
 
-  const EditTaskDialog(
-      {super.key,
-      required this.task,
-      required this.index,
-      required this.updateTask,
-      required this.loadTasks});
+  const EditTaskDialog({
+    super.key,
+    required this.task,
+    required this.index,
+    required this.updateTask,
+  });
 
   @override
   State<EditTaskDialog> createState() => _EditTaskDialogState();
@@ -62,17 +62,18 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
             ),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(
                   Theme.of(context).colorScheme.secondaryContainer,
                 ),
-                foregroundColor: MaterialStatePropertyAll(
+                foregroundColor: WidgetStatePropertyAll(
                   Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
               ),
               onPressed: () async {
                 Navigator.pop(context);
                 await TaskService.deleteTask(widget.task.id);
-                widget.loadTasks();
+                if (!context.mounted) return;
+                await TaskWidget.of(context).downloadTasks();
               },
               child: const Text('Deletar'),
             ),
