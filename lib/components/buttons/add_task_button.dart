@@ -10,7 +10,7 @@ final class AddTaskButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (context) => AddTaskDialog(),
+          builder: (context) => const AddTaskDialog(),
         );
       },
       child: const Icon(Icons.add),

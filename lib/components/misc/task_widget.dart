@@ -5,17 +5,13 @@ class TaskWidget extends InheritedWidget {
   final List<ClientTaskModel>? tasks;
   final Future<void> Function() downloadTasks;
   final Future<void> Function(String title) addTask;
-  final Future<void> Function(
-    String id, {
-    String? newTitle,
-    bool? newDone,
-    int? newServerId,
-  }) updateTask;
+  final Future<void> Function(String id,
+      {String? newTitle, bool? newDone, int? newServerId}) updateTask;
 
   const TaskWidget({
     super.key,
     required super.child,
-    this.tasks,
+    required this.tasks,
     required this.downloadTasks,
     required this.addTask,
     required this.updateTask,
