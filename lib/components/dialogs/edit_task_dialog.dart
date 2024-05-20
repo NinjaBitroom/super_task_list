@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/components/task_widget.dart';
-import 'package:super_task_list/models/task_model.dart';
-import 'package:super_task_list/services/task_service.dart';
+import 'package:super_task_list/components/misc/task_widget.dart';
+import 'package:super_task_list/database/mem_operations.dart';
+import 'package:super_task_list/models/client_task_model.dart';
 
 class EditTaskDialog extends StatefulWidget {
-  final TaskModel task;
+  final ClientTaskModel task;
   final int index;
-  final Future<void> Function(
-    BuildContext context,
-    TextEditingController controller,
-    int index,
-  ) updateTask;
 
   const EditTaskDialog({
     super.key,
     required this.task,
     required this.index,
-    required this.updateTask,
   });
 
   @override
@@ -35,10 +29,9 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
           controller: titleController,
           autofocus: true,
           onSubmitted: (value) async {
-            await widget.updateTask(
-              context,
-              titleController,
-              widget.index,
+            await TaskWidget.of(context).updateTask(
+              widget.task.clientId,
+              newTitle: titleController.text,
             );
           },
           decoration: const InputDecoration(
@@ -52,10 +45,9 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                await widget.updateTask(
-                  context,
-                  titleController,
-                  widget.index,
+                await TaskWidget.of(context).updateTask(
+                  widget.task.clientId,
+                  newTitle: titleController.text,
                 );
               },
               child: const Text('Salvar'),
@@ -70,10 +62,10 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
                 ),
               ),
               onPressed: () async {
-                Navigator.pop(context);
-                await TaskService.deleteTask(widget.task.id);
-                if (!context.mounted) return;
+                MemOperations.deleteTask(widget.task.clientId);
                 await TaskWidget.of(context).downloadTasks();
+                if (!context.mounted) return;
+                Navigator.pop(context);
               },
               child: const Text('Deletar'),
             ),
