@@ -43,8 +43,10 @@ abstract final class MemOperations {
     return task!;
   }
 
-  static void deleteTask(String id) {
+  static int? deleteTask(String id) {
+    final sid = tasks?.firstWhere((element) => element.clientId == id).serverId;
     tasks?.removeWhere((element) => element.clientId == id);
+    return sid;
   }
 
   static void sortTasks() {

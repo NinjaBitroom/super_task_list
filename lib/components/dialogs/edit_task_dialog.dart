@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:super_task_list/components/misc/task_widget.dart';
-import 'package:super_task_list/database/mem_operations.dart';
 import 'package:super_task_list/models/client_task_model.dart';
 
 class EditTaskDialog extends StatefulWidget {
@@ -62,9 +61,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
                 ),
               ),
               onPressed: () async {
-                MemOperations.deleteTask(widget.task.clientId);
-                await TaskWidget.of(context).downloadTasks();
-                if (!context.mounted) return;
+                TaskWidget.of(context).deleteTask(widget.task.clientId);
                 Navigator.pop(context);
               },
               child: const Text('Deletar'),

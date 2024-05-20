@@ -64,12 +64,26 @@ class _AppWithProvidersState extends State<AppWithProviders> {
     setState(() {});
   }
 
+  Future<void> _deleteTask(String id) async {
+    setState(() {
+      final serverId = MemOperations.deleteTask(id);
+      MemOperations.tasks = MemOperations.tasks;
+      DBOperations.deleteTask(serverId!);
+    });
+  }
+
+  void _forceUpdate() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return TaskWidget(
       downloadTasks: _downloadTasks,
       updateTask: _updateTask,
       addTask: _addTask,
+      deleteTask: _deleteTask,
+      forceUpdate: _forceUpdate,
       tasks: MemOperations.tasks,
       child: const App(),
     );
