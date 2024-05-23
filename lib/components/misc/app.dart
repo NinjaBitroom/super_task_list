@@ -8,23 +8,12 @@ final class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const defaultColor = Colors.blueAccent;
-    final defaultLightColorScheme = AppTheme.createScheme(
-      defaultColor,
-      Brightness.light,
-    );
-    final defaultDarkColorScheme = AppTheme.createScheme(
-      defaultColor,
-      Brightness.dark,
-    );
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         final lightTheme = AppTheme.createThemeData(
-          lightDynamic ?? defaultLightColorScheme,
-        );
+            lightDynamic ?? AppTheme.defaultLightColorScheme, context);
         final darkTheme = AppTheme.createThemeData(
-          darkDynamic ?? defaultDarkColorScheme,
-        );
+            darkDynamic ?? AppTheme.defaultDarkColorScheme, context);
         return MaterialApp.router(
           title: 'Super Lista de Tarefas',
           debugShowCheckedModeBanner: false,
