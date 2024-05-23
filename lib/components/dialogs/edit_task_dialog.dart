@@ -60,8 +60,12 @@ class EditTaskDialog extends StatelessWidget {
                   Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
               ),
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                Provider.of<TaskProvider>(context, listen: false).remove(task);
+                context.pop();
+                if (task.serverId != null) {
+                  await DBOperations.deleteTask(task.serverId!);
+                }
               },
               child: const Text('Deletar'),
             ),
