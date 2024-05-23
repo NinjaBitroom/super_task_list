@@ -11,7 +11,7 @@ final class AddTaskDialog extends StatelessWidget {
 
   AddTaskDialog({super.key});
 
-  _saveTask(BuildContext context, String value) async {
+  Future<void> _saveTask(BuildContext context, String value) async {
     final newClientTask = ClientTaskModel(
       clientId: const Uuid().v1(),
       createdAt: DateTime.now(),

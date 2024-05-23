@@ -28,10 +28,7 @@ final class _TaskTileState extends State<TaskTile> {
         onPressed: () async {
           showDialog(
             context: context,
-            builder: (context) => EditTaskDialog(
-              task: widget.task,
-              index: widget.index,
-            ),
+            builder: (context) => EditTaskDialog(task: widget.task),
           );
         },
         icon: const Icon(Icons.edit),
