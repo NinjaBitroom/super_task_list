@@ -22,6 +22,17 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  ClientTaskModel get(String id) {
+    return _tasks.firstWhere((element) => element.clientId == id);
+  }
+
+  void update(ClientTaskModel task) {
+    final index =
+        _tasks.indexWhere((element) => element.clientId == task.clientId);
+    _tasks[index] = task;
+    notifyListeners();
+  }
+
   void remove(ClientTaskModel task) {
     _tasks.removeWhere((element) => element.clientId == task.clientId);
     notifyListeners();

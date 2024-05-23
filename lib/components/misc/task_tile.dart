@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:super_task_list/components/dialogs/edit_task_dialog.dart';
+import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/client_task_model.dart';
-
-import '../../database/mem_operations.dart';
+import 'package:super_task_list/providers/task_provider.dart';
 
 final class TaskTile extends StatefulWidget {
   final ClientTaskModel task;
@@ -37,13 +38,17 @@ final class _TaskTileState extends State<TaskTile> {
       ),
       title: Text(widget.task.title),
       value: widget.task.done,
-      onChanged: (value) {
-        setState(() {
-          MemOperations.updateTask(
-            widget.task.clientId,
+      onChanged: (value) async {
+        final provider = Provider.of<TaskProvider>(context, listen: false);
+        final task = provider.get(widget.task.clientId);
+        task.done = value!;
+        provider.update(task);
+        if (task.serverId != null) {
+          await DBOperations.updateTask(
+            task.serverId!,
             newDone: value,
           );
-        });
+        }
       },
     );
   }
