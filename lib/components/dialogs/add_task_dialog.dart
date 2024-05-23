@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/components/misc/task_widget.dart';
 
 final class AddTaskDialog extends StatelessWidget {
   const AddTaskDialog({super.key});
@@ -13,9 +12,7 @@ final class AddTaskDialog extends StatelessWidget {
       children: [
         TextField(
           controller: titleController,
-          onSubmitted: (value) async {
-            await TaskWidget.of(context).addTask(titleController.text);
-          },
+          onSubmitted: (value) async {},
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Nome da tarefa',
@@ -24,9 +21,7 @@ final class AddTaskDialog extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         ElevatedButton(
-          onPressed: () async {
-            await TaskWidget.of(context).addTask(titleController.text);
-          },
+          onPressed: () async {},
           child: const Text('Salvar'),
         )
       ],

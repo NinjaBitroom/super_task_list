@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/components/misc/task_widget.dart';
 import 'package:super_task_list/models/client_task_model.dart';
 
 class EditTaskDialog extends StatefulWidget {
@@ -27,12 +26,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
         TextField(
           controller: titleController,
           autofocus: true,
-          onSubmitted: (value) async {
-            await TaskWidget.of(context).updateTask(
-              widget.task.clientId,
-              newTitle: titleController.text,
-            );
-          },
+          onSubmitted: (value) async {},
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
             labelText: 'Nome da tarefa',
@@ -43,12 +37,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ElevatedButton(
-              onPressed: () async {
-                await TaskWidget.of(context).updateTask(
-                  widget.task.clientId,
-                  newTitle: titleController.text,
-                );
-              },
+              onPressed: () async {},
               child: const Text('Salvar'),
             ),
             ElevatedButton(
@@ -60,8 +49,7 @@ final class _EditTaskDialogState extends State<EditTaskDialog> {
                   Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
               ),
-              onPressed: () async {
-                TaskWidget.of(context).deleteTask(widget.task.clientId);
+              onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text('Deletar'),
