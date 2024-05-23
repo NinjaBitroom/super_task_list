@@ -4,8 +4,8 @@ import 'package:super_task_list/components/buttons/add_task_button.dart';
 import 'package:super_task_list/components/buttons/restart_button.dart';
 import 'package:super_task_list/components/buttons/sign_out_button.dart';
 import 'package:super_task_list/components/misc/task_list_view.dart';
-import 'package:super_task_list/models/task_list_model.dart';
 import 'package:super_task_list/pages/base_page.dart';
+import 'package:super_task_list/providers/task_provider.dart';
 
 final class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +23,7 @@ final class _HomePageState extends State<HomePage> {
       actions: [
         RestartButton(
           onPressed: () async {
-            await Provider.of<TaskListModel>(context, listen: false)
+            await Provider.of<TaskProvider>(context, listen: false)
                 .download(notify: true);
           },
         ),

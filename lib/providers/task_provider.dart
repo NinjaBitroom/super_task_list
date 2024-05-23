@@ -5,7 +5,7 @@ import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/client_task_model.dart';
 import 'package:uuid/uuid.dart';
 
-class TaskListModel extends ChangeNotifier {
+class TaskProvider extends ChangeNotifier {
   final List<ClientTaskModel> _tasks = [];
   bool _isLoading = false;
 

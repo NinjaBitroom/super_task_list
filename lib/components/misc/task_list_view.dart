@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:super_task_list/components/misc/custom_progress_indicator.dart';
 import 'package:super_task_list/components/misc/task_tile.dart';
-import 'package:super_task_list/models/task_list_model.dart';
+import 'package:super_task_list/providers/task_provider.dart';
 
 final class TaskListView extends StatefulWidget {
   const TaskListView({super.key});
@@ -15,12 +15,12 @@ final class _TaskListViewState extends State<TaskListView> {
   @override
   void initState() {
     super.initState();
-    Provider.of<TaskListModel>(context, listen: false).download(notify: false);
+    Provider.of<TaskProvider>(context, listen: false).download(notify: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TaskListModel>(
+    return Consumer<TaskProvider>(
       builder: (context, value, child) {
         if (value.isLoading) {
           return const CustomProgressIndicator();
