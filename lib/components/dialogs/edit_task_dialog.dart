@@ -45,21 +45,13 @@ class EditTaskDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
+            FilledButton(
               onPressed: () async {
                 await _editTask(context, titleController.text);
               },
               child: const Text('Salvar'),
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(
-                  Theme.of(context).colorScheme.secondaryContainer,
-                ),
-                foregroundColor: WidgetStatePropertyAll(
-                  Theme.of(context).colorScheme.onSecondaryContainer,
-                ),
-              ),
+            FilledButton.tonal(
               onPressed: () async {
                 Provider.of<TaskProvider>(context, listen: false).remove(task);
                 context.pop();

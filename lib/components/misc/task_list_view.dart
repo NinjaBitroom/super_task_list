@@ -33,12 +33,9 @@ final class _TaskListViewState extends State<TaskListView> {
             padding: MediaQuery.paddingOf(context)
                 .add(const EdgeInsets.fromLTRB(12, 12, 12, 72)),
             itemCount: value.tasks.length,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: TaskTile(
-                task: value.tasks[index],
-                index: index,
-              ),
+            itemBuilder: (context, index) => TaskTile(
+              task: value.tasks[index],
+              index: index,
             ),
           );
         }

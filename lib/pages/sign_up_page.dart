@@ -61,7 +61,7 @@ final class SignUpPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            ElevatedButton(
+            FilledButton(
               child: const Text('Criar Conta'),
               onPressed: () {
                 _trySignUp(context);

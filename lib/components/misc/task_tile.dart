@@ -22,31 +22,33 @@ final class TaskTile extends StatefulWidget {
 final class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      key: Key(widget.task.clientId.toString()),
-      secondary: IconButton(
-        onPressed: () async {
-          showDialog(
-            context: context,
-            builder: (context) => EditTaskDialog(task: widget.task),
-          );
+    return Card.outlined(
+      child: CheckboxListTile(
+        key: Key(widget.task.clientId.toString()),
+        secondary: IconButton(
+          onPressed: () async {
+            showDialog(
+              context: context,
+              builder: (context) => EditTaskDialog(task: widget.task),
+            );
+          },
+          icon: const Icon(Icons.edit),
+        ),
+        title: Text(widget.task.title),
+        value: widget.task.done,
+        onChanged: (value) async {
+          final provider = Provider.of<TaskProvider>(context, listen: false);
+          final task = provider.get(widget.task.clientId);
+          task.done = value!;
+          provider.update(task);
+          if (task.serverId != null) {
+            await DBOperations.updateTask(
+              task.serverId!,
+              newDone: value,
+            );
+          }
         },
-        icon: const Icon(Icons.edit),
       ),
-      title: Text(widget.task.title),
-      value: widget.task.done,
-      onChanged: (value) async {
-        final provider = Provider.of<TaskProvider>(context, listen: false);
-        final task = provider.get(widget.task.clientId);
-        task.done = value!;
-        provider.update(task);
-        if (task.serverId != null) {
-          await DBOperations.updateTask(
-            task.serverId!,
-            newDone: value,
-          );
-        }
-      },
     );
   }
 }

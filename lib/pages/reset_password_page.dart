@@ -47,7 +47,7 @@ final class ResetPasswordPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            ElevatedButton(
+            FilledButton(
               onPressed: () async {
                 await _tryResetPassword(context);
               },

@@ -43,7 +43,7 @@ final class AddTaskDialog extends StatelessWidget {
           autofocus: true,
         ),
         const SizedBox(height: 12),
-        ElevatedButton(
+        FilledButton(
           onPressed: () async {
             await _saveTask(context, titleController.text);
           },

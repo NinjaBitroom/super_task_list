@@ -62,7 +62,7 @@ final class SignInPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            ElevatedButton(
+            FilledButton(
               onPressed: () {
                 _trySignIn(context);
               },
