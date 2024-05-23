@@ -4,7 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
-  system_theme
+  dynamic_color
   url_launcher_windows
 )
 

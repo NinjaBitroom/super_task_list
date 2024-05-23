@@ -35,8 +35,8 @@ abstract final class AppTheme {
   ) {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(scheme.primary),
-        foregroundColor: MaterialStatePropertyAll(scheme.onPrimary),
+        backgroundColor: WidgetStatePropertyAll(scheme.primary),
+        foregroundColor: WidgetStatePropertyAll(scheme.onPrimary),
       ),
     );
   }
@@ -62,7 +62,7 @@ abstract final class AppTheme {
       centerTitle: true,
       scrolledUnderElevation: 0,
       elevation: 0,
-      backgroundColor: scheme.background.withOpacity(0.9),
+      backgroundColor: scheme.surface.withOpacity(0.9),
       systemOverlayStyle: _createSystemUiOverlayStyle(scheme),
     );
   }
@@ -71,7 +71,7 @@ abstract final class AppTheme {
     return SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
-      systemNavigationBarColor: scheme.background.withOpacity(0.6),
+      systemNavigationBarColor: scheme.surface.withOpacity(0.6),
       systemNavigationBarIconBrightness: _getReverseBrightness(
         scheme.brightness,
       ),

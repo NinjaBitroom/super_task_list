@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:super_task_list/components/add_task_dialog.dart';
+import 'package:super_task_list/components/dialogs/add_task_dialog.dart';
 
 final class AddTaskButton extends StatelessWidget {
-  final Future<void> Function(
-    BuildContext context,
-    TextEditingController controller,
-  ) addTask;
-
-  const AddTaskButton({super.key, required this.addTask});
+  const AddTaskButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +10,7 @@ final class AddTaskButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (context) => AddTaskDialog(addTask: addTask),
+          builder: (context) => AddTaskDialog(),
         );
       },
       child: const Icon(Icons.add),
