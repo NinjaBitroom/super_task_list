@@ -11,9 +11,21 @@ final class App extends StatelessWidget {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         final lightTheme = AppTheme.createThemeData(
-            lightDynamic ?? AppTheme.defaultLightColorScheme, context);
+          AppTheme.defaultLightColorScheme
+              .copyWith(
+                primary: lightDynamic?.primary,
+              )
+              .harmonized(),
+          context,
+        );
         final darkTheme = AppTheme.createThemeData(
-            darkDynamic ?? AppTheme.defaultDarkColorScheme, context);
+          AppTheme.defaultDarkColorScheme
+              .copyWith(
+                primary: darkDynamic?.primary,
+              )
+              .harmonized(),
+          context,
+        );
         return MaterialApp.router(
           title: 'Super Lista de Tarefas',
           debugShowCheckedModeBanner: false,

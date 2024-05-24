@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract final class AppTheme {
-  static const defaultColor = Colors.blueAccent;
-  static final defaultLightColorScheme = createScheme(
-    defaultColor,
-    Brightness.light,
-  );
-  static final defaultDarkColorScheme = createScheme(
-    defaultColor,
-    Brightness.dark,
-  );
+  static const defaultLightColorScheme = ColorScheme.light();
+  static const defaultDarkColorScheme = ColorScheme.dark();
+  static const defaultHighContrastLightColorScheme =
+      ColorScheme.highContrastLight();
+  static const defaultHighContrastDarkColorScheme =
+      ColorScheme.highContrastDark();
 
   static ThemeData createTheme(
       Color seedColor, Brightness brightness, BuildContext context) {
