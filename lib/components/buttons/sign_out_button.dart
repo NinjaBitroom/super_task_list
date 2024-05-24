@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:super_task_list/database/db_operations.dart';
-import 'package:super_task_list/utils/app_routes.dart';
+import 'package:super_task_list/routes/home_route.dart';
+import 'package:super_task_list/routes/sign_in_route.dart';
 
 final class SignOutButton extends StatelessWidget {
   const SignOutButton({super.key});
@@ -11,7 +11,7 @@ final class SignOutButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         DBOperations.signOut();
-        context.go(AppRoutes.signInPage);
+        const SignInRoute().go(context);
       },
       icon: const Icon(Icons.logout),
     );

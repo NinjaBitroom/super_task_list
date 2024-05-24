@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:super_task_list/components/fields/email_form_field.dart';
 import 'package:super_task_list/components/fields/password_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
-import 'package:super_task_list/utils/app_routes.dart';
+import 'package:super_task_list/routes/forgot_password_route.dart';
+import 'package:super_task_list/routes/home_route.dart';
+import 'package:super_task_list/routes/sign_up_route.dart';
 
 final class SignInPage extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -22,7 +23,7 @@ final class SignInPage extends StatelessWidget {
       if ((value.session == null) && (value.user == null)) {
         throw Exception('Erro ao fazer login!');
       }
-      context.go(AppRoutes.homePage);
+      const HomeRoute().go(context);
     }).onError((error, stackTrace) {
       debugPrint('$stackTrace');
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -73,7 +74,7 @@ final class SignInPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.push(AppRoutes.signUpPage);
+                const SignUpRoute().push(context);
               },
               child: const Text('Criar uma nova conta'),
             ),
@@ -82,7 +83,7 @@ final class SignInPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.push(AppRoutes.forgotPasswordPage);
+                const ForgotPasswordRoute().push(context);
               },
               child: const Text('Esqueci minha senha'),
             ),

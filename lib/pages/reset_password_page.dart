@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:super_task_list/components/fields/password_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/pages/base_page.dart';
-import 'package:super_task_list/utils/app_routes.dart';
+import 'package:super_task_list/routes/home_route.dart';
 
 final class ResetPasswordPage extends StatelessWidget {
   final _newPasswordController = TextEditingController();
@@ -15,7 +14,7 @@ final class ResetPasswordPage extends StatelessWidget {
     try {
       await DBOperations.resetPassword(_newPasswordController.text);
       if (!context.mounted) return;
-      context.go(AppRoutes.homePage);
+      const HomeRoute().go(context);
     } catch (e, t) {
       debugPrint(t.toString());
       message = '$e';

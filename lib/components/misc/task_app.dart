@@ -1,8 +1,9 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:super_task_list/providers/task_provider.dart';
-import 'package:super_task_list/utils/app_routes.dart';
+import 'package:super_task_list/routes/home_route.dart';
 import 'package:super_task_list/utils/app_theme.dart';
 
 final class TaskApp extends StatelessWidget {
@@ -30,7 +31,7 @@ final class TaskApp extends StatelessWidget {
             themeMode: ThemeMode.system,
             theme: lightTheme,
             darkTheme: darkTheme,
-            routerConfig: AppRoutes.router,
+            routerConfig: GoRouter(routes: $appRoutes),
           );
         },
       ),
