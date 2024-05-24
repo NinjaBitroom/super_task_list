@@ -1,25 +1,15 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract final class AppTheme {
-  static const defaultLightColorScheme = ColorScheme.light();
-  static const defaultDarkColorScheme = ColorScheme.dark();
-  static const defaultHighContrastLightColorScheme =
-      ColorScheme.highContrastLight();
-  static const defaultHighContrastDarkColorScheme =
-      ColorScheme.highContrastDark();
-
-  static ThemeData createTheme(
-      Color seedColor, Brightness brightness, BuildContext context) {
-    final ColorScheme scheme = createScheme(seedColor, brightness);
-    return createThemeData(scheme, context);
-  }
-
-  static ColorScheme createScheme(Color seedColor, Brightness brightness) {
-    return ColorScheme.fromSeed(
-      seedColor: seedColor,
-      brightness: brightness,
-    );
+  static ThemeData generateTheme(
+    BuildContext context,
+    ColorScheme scheme,
+    Color? primaryColor,
+  ) {
+    return createThemeData(
+        scheme.copyWith(primary: primaryColor).harmonized(), context);
   }
 
   static ThemeData createThemeData(ColorScheme scheme, BuildContext context) {
