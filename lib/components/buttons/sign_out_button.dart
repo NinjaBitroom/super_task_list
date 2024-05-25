@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:super_task_list/database/db_operations.dart';
-import 'package:super_task_list/routes/home_route.dart';
 import 'package:super_task_list/routes/sign_in_route.dart';
 
 final class SignOutButton extends StatelessWidget {

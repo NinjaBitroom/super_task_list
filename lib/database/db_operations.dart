@@ -1,6 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:super_task_list/models/task_model.dart';
-import 'package:super_task_list/routes/home_route.dart';
 import 'package:super_task_list/routes/reset_password_route.dart';
 
 abstract final class DBOperations {
