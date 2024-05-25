@@ -27,6 +27,7 @@ final class PasswordFormField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText ?? 'Senha',
         prefixIcon: const Icon(Icons.password),
+        border: const OutlineInputBorder(),
       ),
       focusNode: currentFocusNode,
       onFieldSubmitted: onFieldSubmitted,

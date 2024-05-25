@@ -37,7 +37,6 @@ class EditTaskDialog extends StatelessWidget {
             await _editTask(context, value);
           },
           decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
             labelText: 'Nome da tarefa',
           ),
         ),

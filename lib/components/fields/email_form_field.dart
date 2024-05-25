@@ -5,11 +5,12 @@ final class EmailFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
 
-  const EmailFormField(
-      {super.key,
-      this.controller,
-      this.onFieldSubmitted,
-      this.textInputAction});
+  const EmailFormField({
+    super.key,
+    this.controller,
+    this.onFieldSubmitted,
+    this.textInputAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ final class EmailFormField extends StatelessWidget {
       decoration: const InputDecoration(
         labelText: 'E-mail',
         prefixIcon: Icon(Icons.email),
+        border: OutlineInputBorder(),
       ),
       onFieldSubmitted: onFieldSubmitted,
       focusNode: focusNode,

@@ -37,7 +37,6 @@ final class AddTaskDialog extends StatelessWidget {
             await _saveTask(context, value);
           },
           decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
             labelText: 'Nome da tarefa',
           ),
           autofocus: true,

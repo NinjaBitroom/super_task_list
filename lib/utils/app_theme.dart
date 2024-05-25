@@ -14,14 +14,7 @@ abstract final class AppTheme {
 
   static ThemeData createThemeData(ColorScheme scheme, BuildContext context) {
     return ThemeData.from(colorScheme: scheme, useMaterial3: true).copyWith(
-      inputDecorationTheme: _createInputDecorationTheme(),
       appBarTheme: _createAppBarTheme(scheme, context),
-    );
-  }
-
-  static InputDecorationTheme _createInputDecorationTheme() {
-    return const InputDecorationTheme(
-      border: OutlineInputBorder(),
     );
   }
 
