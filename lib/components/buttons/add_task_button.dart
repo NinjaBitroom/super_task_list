@@ -7,6 +7,7 @@ final class AddTaskButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'addTask',
       onPressed: () {
         showDialog(
           context: context,
