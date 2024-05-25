@@ -14,18 +14,16 @@ final class TaskApp extends StatelessWidget {
       create: (context) => TaskProvider(),
       child: DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          final lightTheme = AppTheme.createThemeData(
-            lightDynamic ?? AppTheme.defaultLightColorScheme,
-          );
-          final darkTheme = AppTheme.createThemeData(
-            darkDynamic ?? AppTheme.defaultDarkColorScheme,
-          );
           return MaterialApp.router(
             title: 'Super Lista de Tarefas',
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.system,
-            theme: lightTheme,
-            darkTheme: darkTheme,
+            theme: ThemeData.from(
+              colorScheme: lightDynamic ?? AppTheme.defaultLightColorScheme,
+            ),
+            darkTheme: ThemeData.from(
+              colorScheme: darkDynamic ?? AppTheme.defaultDarkColorScheme,
+            ),
             routerConfig: AppRouter.router,
           );
         },

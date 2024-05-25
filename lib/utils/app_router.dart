@@ -5,7 +5,7 @@ import 'package:super_task_list/routes/reset_password_route.dart' as rpr;
 import 'package:super_task_list/routes/sign_in_route.dart' as sir;
 import 'package:super_task_list/routes/sign_up_route.dart' as sur;
 
-final class AppRouter {
+abstract final class AppRouter {
   static final router = GoRouter(routes: routes);
 
   static final routes = [

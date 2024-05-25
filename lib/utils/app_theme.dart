@@ -12,13 +12,6 @@ abstract final class AppTheme {
     brightness: Brightness.dark,
   );
 
-  static ThemeData createThemeData(ColorScheme scheme) {
-    return ThemeData.from(
-      colorScheme: scheme,
-      useMaterial3: true,
-    );
-  }
-
   static SystemUiOverlayStyle createSystemUiOverlayStyle(BuildContext context) {
     return SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -34,7 +27,7 @@ abstract final class AppTheme {
     );
   }
 
-  static _hasGestures(BuildContext context) {
+  static bool _hasGestures(BuildContext context) {
     return MediaQuery.of(context).systemGestureInsets.left > 0;
   }
 
