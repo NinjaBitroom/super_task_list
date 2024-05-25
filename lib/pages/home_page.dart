@@ -13,16 +13,37 @@ final class HomePage extends StatefulWidget {
 }
 
 final class _HomePageState extends State<HomePage> {
+  final _homeController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return const BasePage(
-      leading: SignOutButton(),
+    return BasePage(
+      leading: const SignOutButton(),
       title: 'Suas Tarefas',
-      actions: [
+      actions: const [
         RestartButton(),
       ],
-      floatingActionButton: AddTaskButton(),
-      child: TaskListView(),
+      floatingActionButton: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton.small(
+                onPressed: () {
+                  _homeController.animateTo(
+                    0,
+                    duration: Durations.medium2,
+                    curve: Curves.bounceInOut,
+                  );
+                },
+                child: const Icon(Icons.arrow_upward),
+              ),
+            ),
+            const AddTaskButton(),
+          ],
+        ),
+      ),
+      child: TaskListView(controller: _homeController),
     );
   }
 }
