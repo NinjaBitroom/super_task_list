@@ -7,12 +7,10 @@ import 'package:super_task_list/providers/task_provider.dart';
 
 final class TaskTile extends StatefulWidget {
   final ClientTaskModel task;
-  final int index;
 
   const TaskTile({
     super.key,
     required this.task,
-    required this.index,
   });
 
   @override

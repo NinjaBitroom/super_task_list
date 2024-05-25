@@ -17,6 +17,22 @@ class TaskProvider extends ChangeNotifier {
     return UnmodifiableListView(taskListCopy);
   }
 
+  UnmodifiableListView<ClientTaskModel> get incompleteTasks {
+    final taskListCopy = List<ClientTaskModel>.from(_tasks);
+    taskListCopy.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    return UnmodifiableListView(
+      taskListCopy.where((element) => !element.done),
+    );
+  }
+
+  UnmodifiableListView<ClientTaskModel> get completedTasks {
+    final taskListCopy = List<ClientTaskModel>.from(_tasks);
+    taskListCopy.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    return UnmodifiableListView(
+      taskListCopy.where((element) => element.done),
+    );
+  }
+
   void add(ClientTaskModel task) {
     _tasks.add(task);
     notifyListeners();
