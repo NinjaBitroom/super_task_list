@@ -4,7 +4,7 @@ import 'package:super_task_list/pages/reset_password_page.dart';
 
 part 'reset_password_route.g.dart';
 
-@TypedGoRoute<ResetPasswordRoute>(path: '/resetPasswordPage')
+@TypedGoRoute<ResetPasswordRoute>(path: '/reset-password')
 class ResetPasswordRoute extends GoRouteData {
   const ResetPasswordRoute();
 

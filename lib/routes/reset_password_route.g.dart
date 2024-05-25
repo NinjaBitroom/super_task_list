@@ -11,7 +11,7 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $resetPasswordRoute => GoRouteData.$route(
-      path: '/resetPasswordPage',
+      path: '/reset-password',
       factory: $ResetPasswordRouteExtension._fromState,
     );
 
@@ -20,7 +20,7 @@ extension $ResetPasswordRouteExtension on ResetPasswordRoute {
       const ResetPasswordRoute();
 
   String get location => GoRouteData.$location(
-        '/resetPasswordPage',
+        '/reset-password',
       );
 
   void go(BuildContext context) => context.go(location);

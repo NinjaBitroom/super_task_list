@@ -11,7 +11,7 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $forgotPasswordRoute => GoRouteData.$route(
-      path: '/forgotPasswordPage',
+      path: '/forgot-password',
       factory: $ForgotPasswordRouteExtension._fromState,
     );
 
@@ -20,7 +20,7 @@ extension $ForgotPasswordRouteExtension on ForgotPasswordRoute {
       const ForgotPasswordRoute();
 
   String get location => GoRouteData.$location(
-        '/forgotPasswordPage',
+        '/forgot-password',
       );
 
   void go(BuildContext context) => context.go(location);

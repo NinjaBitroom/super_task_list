@@ -11,7 +11,7 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $signInRoute => GoRouteData.$route(
-      path: '/signInPage',
+      path: '/sign-in',
       factory: $SignInRouteExtension._fromState,
     );
 
@@ -19,7 +19,7 @@ extension $SignInRouteExtension on SignInRoute {
   static SignInRoute _fromState(GoRouterState state) => const SignInRoute();
 
   String get location => GoRouteData.$location(
-        '/signInPage',
+        '/sign-in',
       );
 
   void go(BuildContext context) => context.go(location);

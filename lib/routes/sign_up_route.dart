@@ -4,7 +4,7 @@ import 'package:super_task_list/pages/sign_up_page.dart';
 
 part 'sign_up_route.g.dart';
 
-@TypedGoRoute<SignUpRoute>(path: '/signUpPage')
+@TypedGoRoute<SignUpRoute>(path: '/sign-up')
 class SignUpRoute extends GoRouteData {
   const SignUpRoute();
 
