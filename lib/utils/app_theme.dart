@@ -1,16 +1,16 @@
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract final class AppTheme {
-  static ThemeData generateTheme(
-    BuildContext context,
-    ColorScheme scheme,
-    Color? primaryColor,
-  ) {
-    return createThemeData(
-        scheme.copyWith(primary: primaryColor).harmonized(), context);
-  }
+  static const defaultColor = Colors.blueAccent;
+  static final defaultLightColorScheme = ColorScheme.fromSeed(
+    seedColor: defaultColor,
+    brightness: Brightness.light,
+  );
+  static final defaultDarkColorScheme = ColorScheme.fromSeed(
+    seedColor: defaultColor,
+    brightness: Brightness.dark,
+  );
 
   static ThemeData createThemeData(ColorScheme scheme, BuildContext context) {
     return ThemeData.from(colorScheme: scheme, useMaterial3: true).copyWith(
