@@ -9,6 +9,7 @@ import 'package:super_task_list/providers/task_provider.dart';
 
 final class TaskListView extends StatefulWidget {
   final ScrollController controller;
+
   const TaskListView({super.key, required this.controller});
 
   @override
@@ -17,6 +18,7 @@ final class TaskListView extends StatefulWidget {
 
 final class _TaskListViewState extends State<TaskListView> {
   int _selectedFilter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -81,7 +83,7 @@ final class _TaskListViewState extends State<TaskListView> {
           return ListView.builder(
             controller: widget.controller,
             padding: MediaQuery.paddingOf(context).add(
-              const EdgeInsets.fromLTRB(12, 12, 12, 86),
+              const EdgeInsets.fromLTRB(12, 12, 12, 128),
             ),
             itemCount: tasks.length + 1,
             itemBuilder: (context, index) {
