@@ -36,37 +36,39 @@ final class SignUpPage extends StatelessWidget {
       title: 'Criar Conta',
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            EmailFormField(
-              controller: _emailController,
-              onFieldSubmitted: (value) {
-                _passwordFocusNode.requestFocus();
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            PasswordFormField(
-              controller: _passwordController,
-              focusNode: _passwordFocusNode,
-              autofillHints: const [AutofillHints.newPassword],
-              onFieldSubmitted: (value) {
-                _trySignUp(context);
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            FilledButton(
-              child: const Text('Criar Conta'),
-              onPressed: () {
-                _trySignUp(context);
-              },
-            ),
-          ],
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              EmailFormField(
+                controller: _emailController,
+                onFieldSubmitted: (value) {
+                  _passwordFocusNode.requestFocus();
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              PasswordFormField(
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
+                autofillHints: const [AutofillHints.newPassword],
+                onFieldSubmitted: (value) {
+                  _trySignUp(context);
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              FilledButton(
+                child: const Text('Criar Conta'),
+                onPressed: () {
+                  _trySignUp(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

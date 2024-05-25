@@ -26,43 +26,46 @@ class EditTaskDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleController = TextEditingController(text: task.title);
-    return SimpleDialog(
-      contentPadding: const EdgeInsets.all(12),
-      title: const Text('Editar tarefa'),
-      children: [
-        TextField(
-          controller: titleController,
-          autofocus: true,
-          onSubmitted: (value) async {
-            await _editTask(context, value);
-          },
-          decoration: const InputDecoration(
-            labelText: 'Nome da tarefa',
+    return Form(
+      child: SimpleDialog(
+        contentPadding: const EdgeInsets.all(12),
+        title: const Text('Editar tarefa'),
+        children: [
+          TextField(
+            controller: titleController,
+            autofocus: true,
+            onSubmitted: (value) async {
+              await _editTask(context, value);
+            },
+            decoration: const InputDecoration(
+              labelText: 'Nome da tarefa',
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FilledButton(
-              onPressed: () async {
-                await _editTask(context, titleController.text);
-              },
-              child: const Text('Salvar'),
-            ),
-            FilledButton.tonal(
-              onPressed: () async {
-                Provider.of<TaskProvider>(context, listen: false).remove(task);
-                context.pop();
-                if (task.serverId != null) {
-                  await DBOperations.deleteTask(task.serverId!);
-                }
-              },
-              child: const Text('Deletar'),
-            ),
-          ],
-        )
-      ],
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FilledButton(
+                onPressed: () async {
+                  await _editTask(context, titleController.text);
+                },
+                child: const Text('Salvar'),
+              ),
+              FilledButton.tonal(
+                onPressed: () async {
+                  Provider.of<TaskProvider>(context, listen: false)
+                      .remove(task);
+                  context.pop();
+                  if (task.serverId != null) {
+                    await DBOperations.deleteTask(task.serverId!);
+                  }
+                },
+                child: const Text('Deletar'),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

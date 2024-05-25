@@ -27,28 +27,30 @@ final class AddTaskDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleDialog(
-      contentPadding: const EdgeInsets.all(12),
-      title: const Text('Nova tarefa'),
-      children: [
-        TextField(
-          controller: titleController,
-          onSubmitted: (value) async {
-            await _saveTask(context, value);
-          },
-          decoration: const InputDecoration(
-            labelText: 'Nome da tarefa',
+    return Form(
+      child: SimpleDialog(
+        contentPadding: const EdgeInsets.all(12),
+        title: const Text('Nova tarefa'),
+        children: [
+          TextField(
+            controller: titleController,
+            onSubmitted: (value) async {
+              await _saveTask(context, value);
+            },
+            decoration: const InputDecoration(
+              labelText: 'Nome da tarefa',
+            ),
+            autofocus: true,
           ),
-          autofocus: true,
-        ),
-        const SizedBox(height: 12),
-        FilledButton(
-          onPressed: () async {
-            await _saveTask(context, titleController.text);
-          },
-          child: const Text('Salvar'),
-        )
-      ],
+          const SizedBox(height: 12),
+          FilledButton(
+            onPressed: () async {
+              await _saveTask(context, titleController.text);
+            },
+            child: const Text('Salvar'),
+          )
+        ],
+      ),
     );
   }
 }

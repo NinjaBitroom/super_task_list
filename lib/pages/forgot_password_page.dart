@@ -27,31 +27,33 @@ final class ForgotPasswordPage extends StatelessWidget {
       title: 'Recuperar senha',
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text('Informe seu e-mail para recuperar a senha:'),
-            const SizedBox(
-              height: 12,
-            ),
-            EmailFormField(
-              controller: _emailController,
-              onFieldSubmitted: (value) async {
-                await _tryRecoverPassword(context);
-              },
-              textInputAction: TextInputAction.send,
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            FilledButton(
-              onPressed: () async {
-                await _tryRecoverPassword(context);
-              },
-              child: const Text('Recuperar'),
-            ),
-          ],
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text('Informe seu e-mail para recuperar a senha:'),
+              const SizedBox(
+                height: 12,
+              ),
+              EmailFormField(
+                controller: _emailController,
+                onFieldSubmitted: (value) async {
+                  await _tryRecoverPassword(context);
+                },
+                textInputAction: TextInputAction.send,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              FilledButton(
+                onPressed: () async {
+                  await _tryRecoverPassword(context);
+                },
+                child: const Text('Recuperar'),
+              ),
+            ],
+          ),
         ),
       ),
     );

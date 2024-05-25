@@ -31,28 +31,30 @@ final class ResetPasswordPage extends StatelessWidget {
       title: 'Recuperar Senha',
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            PasswordFormField(
-              autofillHints: const [AutofillHints.newPassword],
-              controller: _newPasswordController,
-              labelText: 'Nova Senha',
-              onFieldSubmitted: (value) async {
-                await _tryResetPassword(context);
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            FilledButton(
-              onPressed: () async {
-                await _tryResetPassword(context);
-              },
-              child: const Text('Salvar'),
-            ),
-          ],
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              PasswordFormField(
+                autofillHints: const [AutofillHints.newPassword],
+                controller: _newPasswordController,
+                labelText: 'Nova Senha',
+                onFieldSubmitted: (value) async {
+                  await _tryResetPassword(context);
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              FilledButton(
+                onPressed: () async {
+                  await _tryResetPassword(context);
+                },
+                child: const Text('Salvar'),
+              ),
+            ],
+          ),
         ),
       ),
     );

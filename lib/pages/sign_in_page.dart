@@ -39,55 +39,57 @@ final class SignInPage extends StatelessWidget {
       automaticallyImplyLeading: false,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            EmailFormField(
-              controller: _emailController,
-              onFieldSubmitted: (value) {
-                _passwordFocusNode.requestFocus();
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            PasswordFormField(
-              autofillHints: const [AutofillHints.password],
-              controller: _passwordController,
-              focusNode: _passwordFocusNode,
-              onFieldSubmitted: (value) {
-                _trySignIn(context);
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            FilledButton(
-              onPressed: () {
-                _trySignIn(context);
-              },
-              child: const Text('Entrar'),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            TextButton(
-              onPressed: () {
-                const SignUpRoute().push(context);
-              },
-              child: const Text('Criar uma nova conta'),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            TextButton(
-              onPressed: () {
-                const ForgotPasswordRoute().push(context);
-              },
-              child: const Text('Esqueci minha senha'),
-            ),
-          ],
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              EmailFormField(
+                controller: _emailController,
+                onFieldSubmitted: (value) {
+                  _passwordFocusNode.requestFocus();
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              PasswordFormField(
+                autofillHints: const [AutofillHints.password],
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
+                onFieldSubmitted: (value) {
+                  _trySignIn(context);
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              FilledButton(
+                onPressed: () {
+                  _trySignIn(context);
+                },
+                child: const Text('Entrar'),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              TextButton(
+                onPressed: () {
+                  const SignUpRoute().push(context);
+                },
+                child: const Text('Criar uma nova conta'),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              TextButton(
+                onPressed: () {
+                  const ForgotPasswordRoute().push(context);
+                },
+                child: const Text('Esqueci minha senha'),
+              ),
+            ],
+          ),
         ),
       ),
     );
