@@ -30,8 +30,9 @@ final class _TaskListViewState extends State<TaskListView> {
           );
         } else {
           return ListView.builder(
-            padding: MediaQuery.paddingOf(context)
-                .add(const EdgeInsets.fromLTRB(12, 12, 12, 72)),
+            padding: MediaQuery.paddingOf(context).add(
+              const EdgeInsets.fromLTRB(12, 12, 12, 86),
+            ),
             itemCount: value.tasks.length,
             itemBuilder: (context, index) => TaskTile(
               task: value.tasks[index],

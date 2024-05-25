@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_task_list/utils/app_theme.dart';
 
 final class BasePage extends StatelessWidget {
   final String title;
@@ -28,6 +29,11 @@ final class BasePage extends StatelessWidget {
         leading: leading,
         title: Text(title),
         actions: actions,
+        centerTitle: true,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.9),
+        systemOverlayStyle: AppTheme.createSystemUiOverlayStyle(context),
       ),
       body: child,
       floatingActionButton: floatingActionButton,

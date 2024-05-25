@@ -12,33 +12,24 @@ abstract final class AppTheme {
     brightness: Brightness.dark,
   );
 
-  static ThemeData createThemeData(ColorScheme scheme, BuildContext context) {
-    return ThemeData.from(colorScheme: scheme, useMaterial3: true).copyWith(
-      appBarTheme: _createAppBarTheme(scheme, context),
+  static ThemeData createThemeData(ColorScheme scheme) {
+    return ThemeData.from(
+      colorScheme: scheme,
+      useMaterial3: true,
     );
   }
 
-  static AppBarTheme _createAppBarTheme(
-      ColorScheme scheme, BuildContext context) {
-    return AppBarTheme(
-      centerTitle: true,
-      scrolledUnderElevation: 0,
-      elevation: 0,
-      backgroundColor: scheme.surface.withOpacity(0.9),
-      systemOverlayStyle: _createSystemUiOverlayStyle(scheme, context),
-    );
-  }
-
-  static SystemUiOverlayStyle _createSystemUiOverlayStyle(
-      ColorScheme scheme, BuildContext context) {
+  static SystemUiOverlayStyle createSystemUiOverlayStyle(BuildContext context) {
     return SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: _getReverseBrightness(scheme.brightness),
+      statusBarIconBrightness: _getReverseBrightness(
+        Theme.of(context).colorScheme.brightness,
+      ),
       systemNavigationBarColor: _hasGestures(context)
           ? Colors.transparent
-          : scheme.surface.withOpacity(0.75),
+          : Theme.of(context).colorScheme.surface.withOpacity(0.75),
       systemNavigationBarIconBrightness: _getReverseBrightness(
-        scheme.brightness,
+        Theme.of(context).colorScheme.brightness,
       ),
     );
   }
