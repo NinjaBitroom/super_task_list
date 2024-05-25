@@ -10,5 +10,5 @@ class ForgotPasswordRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ForgotPasswordPage();
+      const ForgotPasswordPage();
 }

@@ -3,7 +3,7 @@ import 'package:super_task_list/components/forms/reset_password_form.dart';
 import 'package:super_task_list/components/misc/base_page.dart';
 
 final class ResetPasswordPage extends StatelessWidget {
-  ResetPasswordPage({super.key});
+  const ResetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {

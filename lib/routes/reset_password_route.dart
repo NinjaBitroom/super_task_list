@@ -10,5 +10,5 @@ class ResetPasswordRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ResetPasswordPage();
+      const ResetPasswordPage();
 }
