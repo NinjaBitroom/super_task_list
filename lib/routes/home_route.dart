@@ -7,7 +7,7 @@ import 'package:super_task_list/routes/sign_in_route.dart';
 part 'home_route.g.dart';
 
 @TypedGoRoute<HomeRoute>(path: '/')
-class HomeRoute extends GoRouteData {
+final class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override

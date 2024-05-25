@@ -6,7 +6,7 @@ import 'package:super_task_list/routes/forgot_password_route.dart';
 import 'package:super_task_list/routes/home_route.dart';
 import 'package:super_task_list/routes/sign_up_route.dart';
 
-class SignInForm extends StatelessWidget {
+final class SignInForm extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordFocusNode = FocusNode();

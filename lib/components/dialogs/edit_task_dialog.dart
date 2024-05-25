@@ -5,7 +5,7 @@ import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/models/client_task_model.dart';
 import 'package:super_task_list/providers/task_provider.dart';
 
-class EditTaskDialog extends StatelessWidget {
+final class EditTaskDialog extends StatelessWidget {
   final ClientTaskModel task;
 
   const EditTaskDialog({

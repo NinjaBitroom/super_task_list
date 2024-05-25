@@ -3,7 +3,7 @@ import 'package:super_task_list/components/fields/password_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 import 'package:super_task_list/routes/home_route.dart';
 
-class ResetPasswordForm extends StatelessWidget {
+final class ResetPasswordForm extends StatelessWidget {
   final _newPasswordController = TextEditingController();
 
   ResetPasswordForm({super.key});

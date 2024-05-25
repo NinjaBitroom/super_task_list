@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:super_task_list/providers/task_provider.dart';
 
-class RestartButton extends StatelessWidget {
+final class RestartButton extends StatelessWidget {
   const RestartButton({super.key});
 
   @override

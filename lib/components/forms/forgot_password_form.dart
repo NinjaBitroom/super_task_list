@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:super_task_list/components/fields/email_form_field.dart';
 import 'package:super_task_list/database/db_operations.dart';
 
-class ForgotPasswordForm extends StatelessWidget {
+final class ForgotPasswordForm extends StatelessWidget {
   final _emailController = TextEditingController();
 
   ForgotPasswordForm({super.key});
