@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:super_task_list/components/fields/email_form_field.dart';
 import 'package:super_task_list/components/fields/password_form_field.dart';
+import 'package:super_task_list/components/misc/base_page.dart';
 import 'package:super_task_list/database/db_operations.dart';
-import 'package:super_task_list/pages/base_page.dart';
 import 'package:super_task_list/routes/forgot_password_route.dart';
 import 'package:super_task_list/routes/home_route.dart';
 import 'package:super_task_list/routes/sign_up_route.dart';
