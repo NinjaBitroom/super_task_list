@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:super_task_list/components/lists/choice_chip_list.dart';
 import 'package:super_task_list/components/misc/custom_progress_indicator.dart';
 import 'package:super_task_list/components/misc/task_tile.dart';
 import 'package:super_task_list/models/client_task_model.dart';
@@ -17,7 +18,7 @@ final class TaskListView extends StatefulWidget {
 }
 
 final class _TaskListViewState extends State<TaskListView> {
-  int _selectedFilter = 0;
+  int _selectedChoice = 0;
 
   @override
   void initState() {
@@ -27,41 +28,6 @@ final class _TaskListViewState extends State<TaskListView> {
 
   @override
   Widget build(BuildContext context) {
-    final filters = [
-      ChoiceChip(
-        showCheckmark: false,
-        label: const Text('Todas'),
-        selected: _selectedFilter == 0,
-        avatar: const Icon(Icons.list),
-        onSelected: (value) {
-          setState(() {
-            _selectedFilter = 0;
-          });
-        },
-      ),
-      ChoiceChip(
-        showCheckmark: false,
-        label: const Text('Em andamento'),
-        selected: _selectedFilter == 1,
-        onSelected: (value) {
-          setState(() {
-            _selectedFilter = 1;
-          });
-        },
-      ),
-      ChoiceChip(
-        showCheckmark: false,
-        label: const Text('Concluídas'),
-        selected: _selectedFilter == 2,
-        avatar: const Icon(Icons.done_all),
-        onSelected: (value) {
-          setState(() {
-            _selectedFilter = 2;
-          });
-        },
-      ),
-    ];
-
     return Consumer<TaskProvider>(
       builder: (context, value, child) {
         if (value.isLoading) {
@@ -72,7 +38,7 @@ final class _TaskListViewState extends State<TaskListView> {
           );
         } else {
           UnmodifiableListView<ClientTaskModel> tasks = value.tasks;
-          switch (_selectedFilter) {
+          switch (_selectedChoice) {
             case 1:
               tasks = value.incompleteTasks;
               break;
@@ -88,18 +54,13 @@ final class _TaskListViewState extends State<TaskListView> {
             itemCount: tasks.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return SizedBox(
-                  height: 48,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: filters[index],
-                      );
-                    },
-                    itemCount: filters.length,
-                  ),
+                return ChoiceChipList(
+                  selectedChoice: _selectedChoice,
+                  onSelected: (value) {
+                    setState(() {
+                      _selectedChoice = value;
+                    });
+                  },
                 );
               }
               return TaskTile(task: tasks[index - 1]);
