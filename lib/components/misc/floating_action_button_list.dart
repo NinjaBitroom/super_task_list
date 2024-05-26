@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:super_task_list/components/buttons/add_task_button.dart';
 import 'package:super_task_list/components/buttons/scroll_up_button.dart';
 
-class ActionButtonList extends StatefulWidget {
+class FloatingActionButtonList extends StatefulWidget {
   final ScrollController scrollController;
 
-  const ActionButtonList({super.key, required this.scrollController});
+  const FloatingActionButtonList({super.key, required this.scrollController});
 
   @override
-  State<ActionButtonList> createState() => _ActionButtonListState();
+  State<FloatingActionButtonList> createState() =>
+      _FloatingActionButtonListState();
 }
 
-class _ActionButtonListState extends State<ActionButtonList> {
+class _FloatingActionButtonListState extends State<FloatingActionButtonList> {
   @override
   Widget build(BuildContext context) {
     widget.scrollController.addListener(() {
@@ -23,13 +24,9 @@ class _ActionButtonListState extends State<ActionButtonList> {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        IgnorePointer(
-          ignoring: !shouldShow,
-          child: AnimatedOpacity(
-            opacity: shouldShow ? 1 : 0,
-            duration: Durations.medium1,
-            child: ScrollUpButton(controller: widget.scrollController),
-          ),
+        ScrollUpButton(
+          controller: widget.scrollController,
+          visible: shouldShow,
         ),
         const AddTaskButton(),
       ],
