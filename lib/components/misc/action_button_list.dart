@@ -17,20 +17,22 @@ class _ActionButtonListState extends State<ActionButtonList> {
     widget.scrollController.addListener(() {
       setState(() {});
     });
-    if (!widget.scrollController.hasClients) {
-      return const AddTaskButton();
-    }
-    if (widget.scrollController.position.pixels == 0) {
-      return const AddTaskButton();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ScrollUpButton(controller: widget.scrollController),
-          const AddTaskButton(),
-        ],
-      );
-    }
+    bool shouldShow = widget.scrollController.hasClients &&
+        widget.scrollController.position.pixels > 0;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IgnorePointer(
+          ignoring: !shouldShow,
+          child: AnimatedOpacity(
+            opacity: shouldShow ? 1 : 0,
+            duration: Durations.medium1,
+            child: ScrollUpButton(controller: widget.scrollController),
+          ),
+        ),
+        const AddTaskButton(),
+      ],
+    );
   }
 }
