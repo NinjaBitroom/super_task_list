@@ -8,6 +8,8 @@ final class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      tooltip: 'Sair',
+      enableFeedback: true,
       onPressed: () {
         DBOperations.signOut();
         const SignInRoute().go(context);

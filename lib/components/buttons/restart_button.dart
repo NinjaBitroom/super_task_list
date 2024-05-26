@@ -8,6 +8,8 @@ final class RestartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      tooltip: 'Reiniciar lista',
+      enableFeedback: true,
       onPressed: () async {
         await Provider.of<TaskProvider>(context, listen: false)
             .download(notify: true);

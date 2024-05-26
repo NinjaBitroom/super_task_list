@@ -10,6 +10,8 @@ final class ScrollUpButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: FloatingActionButton.small(
+        enableFeedback: true,
+        tooltip: 'Rolar para o topo',
         heroTag: 'scrollToTop',
         onPressed: () {
           controller.animateTo(

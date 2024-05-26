@@ -24,6 +24,8 @@ final class _TaskTileState extends State<TaskTile> {
       child: CheckboxListTile(
         key: Key(widget.task.clientId.toString()),
         secondary: IconButton(
+          enableFeedback: true,
+          tooltip: 'Editar tarefa',
           onPressed: () async {
             showDialog(
               context: context,
