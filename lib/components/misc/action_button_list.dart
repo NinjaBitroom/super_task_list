@@ -3,9 +3,9 @@ import 'package:super_task_list/components/buttons/add_task_button.dart';
 import 'package:super_task_list/components/buttons/scroll_up_button.dart';
 
 class ActionButtonList extends StatefulWidget {
-  final ScrollController controller;
+  final ScrollController scrollController;
 
-  const ActionButtonList({super.key, required this.controller});
+  const ActionButtonList({super.key, required this.scrollController});
 
   @override
   State<ActionButtonList> createState() => _ActionButtonListState();
@@ -14,21 +14,23 @@ class ActionButtonList extends StatefulWidget {
 class _ActionButtonListState extends State<ActionButtonList> {
   @override
   Widget build(BuildContext context) {
-    widget.controller.addListener(() {
+    widget.scrollController.addListener(() {
       setState(() {});
     });
-    if (!widget.controller.hasClients) {
+    if (!widget.scrollController.hasClients) {
       return const AddTaskButton();
     }
-    return widget.controller.position.pixels == 0
-        ? const AddTaskButton()
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ScrollUpButton(controller: widget.controller),
-              const AddTaskButton(),
-            ],
-          );
+    if (widget.scrollController.position.pixels == 0) {
+      return const AddTaskButton();
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ScrollUpButton(controller: widget.scrollController),
+          const AddTaskButton(),
+        ],
+      );
+    }
   }
 }

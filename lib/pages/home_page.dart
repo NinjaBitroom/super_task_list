@@ -13,7 +13,7 @@ final class HomePage extends StatefulWidget {
 }
 
 final class _HomePageState extends State<HomePage> {
-  final _homeController = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,9 @@ final class _HomePageState extends State<HomePage> {
       actions: const [
         RestartButton(),
       ],
-      floatingActionButton: ActionButtonList(controller: _homeController),
-      child: TaskListView(controller: _homeController),
+      floatingActionButton:
+          ActionButtonList(scrollController: _scrollController),
+      child: TaskListView(controller: _scrollController),
     );
   }
 }
