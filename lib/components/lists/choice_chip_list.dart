@@ -19,6 +19,7 @@ class ChoiceChipList extends StatelessWidget {
     return SizedBox(
       height: 48,
       child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           scrollDirection: Axis.horizontal,
           children: List.generate(
             labels.length,

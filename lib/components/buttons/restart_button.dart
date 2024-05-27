@@ -11,8 +11,10 @@ final class RestartButton extends StatelessWidget {
       tooltip: 'Reiniciar lista',
       enableFeedback: true,
       onPressed: () async {
-        await Provider.of<TaskProvider>(context, listen: false)
-            .download(notify: true);
+        await Provider.of<TaskProvider>(
+          context,
+          listen: false,
+        ).download(notify: true);
       },
       icon: const Icon(Icons.restart_alt),
     );
