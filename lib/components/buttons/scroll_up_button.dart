@@ -16,7 +16,8 @@ final class ScrollUpButton extends StatelessWidget {
       ignoring: !visible,
       child: AnimatedOpacity(
         opacity: visible ? 1 : 0,
-        duration: Durations.medium1,
+        duration: Durations.medium2,
+        curve: Easing.standard,
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: FloatingActionButton.small(
@@ -26,8 +27,8 @@ final class ScrollUpButton extends StatelessWidget {
             onPressed: () {
               controller.animateTo(
                 0,
-                duration: Durations.medium4,
-                curve: Curves.decelerate,
+                duration: Durations.long2,
+                curve: Easing.emphasizedDecelerate,
               );
             },
             child: const Icon(Icons.arrow_upward),
