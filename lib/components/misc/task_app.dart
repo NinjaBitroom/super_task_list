@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:super_task_list/providers/task_provider.dart';
 import 'package:super_task_list/utils/app_router.dart';
+import 'package:super_task_list/utils/app_theme.dart';
 
 final class TaskApp extends StatelessWidget {
   const TaskApp({super.key});
@@ -17,24 +18,14 @@ final class TaskApp extends StatelessWidget {
             title: 'Super Lista de Tarefas',
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.system,
-            theme: lightDynamic != null
-                ? ThemeData.from(
-                    colorScheme: ColorScheme.fromSeed(
-                      seedColor: lightDynamic.primary,
-                      brightness: lightDynamic.brightness,
-                    ),
-                    useMaterial3: true,
-                  )
-                : ThemeData.light(useMaterial3: true),
-            darkTheme: darkDynamic != null
-                ? ThemeData.from(
-                    colorScheme: ColorScheme.fromSeed(
-                      seedColor: darkDynamic.primary,
-                      brightness: darkDynamic.brightness,
-                    ),
-                    useMaterial3: true,
-                  )
-                : ThemeData.dark(useMaterial3: true),
+            theme: AppTheme.getThemeData(
+              lightDynamic,
+              ThemeData.light(useMaterial3: true),
+            ),
+            darkTheme: AppTheme.getThemeData(
+              darkDynamic,
+              ThemeData.dark(useMaterial3: true),
+            ),
             routerConfig: AppRouter.router,
           );
         },
