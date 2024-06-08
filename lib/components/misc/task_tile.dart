@@ -15,9 +15,9 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card.filled(
       clipBehavior: Clip.hardEdge,
-      child: CheckboxListTile(
+      child: CheckboxListTile.adaptive(
         key: Key(task.clientId.toString()),
         secondary: EditButton(task: task),
         title: Text(task.title),
