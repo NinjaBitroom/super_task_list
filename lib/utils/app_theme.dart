@@ -2,16 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract final class AppTheme {
-  static const defaultColor = Colors.blueAccent;
-  static final defaultLightColorScheme = ColorScheme.fromSeed(
-    seedColor: defaultColor,
-    brightness: Brightness.light,
-  );
-  static final defaultDarkColorScheme = ColorScheme.fromSeed(
-    seedColor: defaultColor,
-    brightness: Brightness.dark,
-  );
-
   static SystemUiOverlayStyle createSystemUiOverlayStyle(BuildContext context) {
     return SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

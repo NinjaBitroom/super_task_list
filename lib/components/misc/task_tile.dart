@@ -15,7 +15,7 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card.outlined(
+    return Card(
       clipBehavior: Clip.hardEdge,
       child: CheckboxListTile(
         key: Key(task.clientId.toString()),
